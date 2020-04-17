@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="contentful.aspnetcore" Version="4.4.0"/>
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+</Project>
