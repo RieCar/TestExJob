@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contentful.Core;
 using Contentful.Core.Search;
-using Domain;
+using Domain; 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +25,8 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Organisation>>> Get()
         {
-            var qb = QueryBuilder<Organisation>.New.ContentTypeIs("customerId").Include(4);
+            var qb = QueryBuilder<Organisation>.New.ContentTypeIs("customerId")
+                .Include(4);
             var model = await _client.GetEntries(qb);
             Console.WriteLine("Entryname" + model.Total);
             return Ok (model);

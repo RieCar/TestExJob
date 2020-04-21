@@ -4,8 +4,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="contentful.aspnetcore" Version="4.4.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0"/>
   </ItemGroup>
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 </Project>

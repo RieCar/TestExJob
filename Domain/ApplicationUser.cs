@@ -1,0 +1,13 @@
+using Microsoft.AspNetCore.Identity;
+
+namespace Domain
+{
+    public class ApplicationUser : IdentityUser
+    {
+        public string DisplayName { get; set; }
+        public string OrganisationID { get; set; }
+
+       
+    }
+    
+}

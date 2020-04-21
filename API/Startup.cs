@@ -11,6 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Contentful.AspNetCore;
+using Persistence;
+using Microsoft.EntityFrameworkCore;
+using Domain;
+using Microsoft.AspNetCore.Identity;
+using Application.User;
+using MediatR;
 
 namespace API
 {
@@ -26,8 +32,23 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<UserContext>(opt =>
+            {
+                opt.UseSqlite(Configuration.GetConnectionString("myconnection"));
+            });
             services.AddContentful(Configuration);
+            services.AddMediatR(typeof(Login.Handler).Assembly);
             services.AddControllers();
+
+            var builder = services.AddIdentityCore<ApplicationUser>();
+            var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
+            identityBuilder.AddEntityFrameworkStores<UserContext>();
+            identityBuilder.AddSignInManager<SignInManager<ApplicationUser>>();
+
+            // services.AddIdentityCore<ApplicationUser>()
+            // .AddEntityFrameworkStores<UserContext>()
+            // .AddDefaultTokenProviders();
+            services.AddAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +62,7 @@ namespace API
             //app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
