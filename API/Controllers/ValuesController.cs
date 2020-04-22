@@ -25,6 +25,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Organisation>>> Get()
         {
+           //Todo move this to mediator
             var qb = QueryBuilder<Organisation>.New.ContentTypeIs("customerId")
                 .Include(4);
             var model = await _client.GetEntries(qb);
