@@ -7,6 +7,7 @@ using Contentful.Core.Search;
 using Domain; 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Persistence;
 
 namespace API.Controllers
 {
@@ -26,7 +27,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Organisation>>> Get()
         {
            //Todo move this to mediator
-            var qb = QueryBuilder<Organisation>.New.ContentTypeIs("customerId")
+            var qb = QueryBuilder<OrganisationDTO>.New.ContentTypeIs("customerId")
                 .Include(4);
             var model = await _client.GetEntries(qb);
             Console.WriteLine("Entryname" + model.Total);

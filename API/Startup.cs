@@ -17,6 +17,7 @@ using Domain;
 using Microsoft.AspNetCore.Identity;
 using Application.User;
 using MediatR;
+using Application.Organisations;
 
 namespace API
 {
@@ -43,6 +44,7 @@ namespace API
             });
             services.AddContentful(Configuration);
             services.AddMediatR(typeof(Login.Handler).Assembly);
+            services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddControllers();
 
             var builder = services.AddIdentityCore<ApplicationUser>();

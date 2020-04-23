@@ -10,7 +10,7 @@ class App extends Component {
 
   componentDidMount(){
 
-    axios.get('http://localhost:5000/api/values')
+    axios.get('http://localhost:5000/api/organisation')
     .then((response)=> {
       this.setState ({
         values:response.data
@@ -21,12 +21,12 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        
+        <header >      
         <ul>
           {this.state.values.map((value:any)=> (
-            <li key ={value.customerId} > {value.companyName}</li>
+            <li key ={value.customerId} > {value.companyName}
+            <p> {value.customerDescription}</p>
+            <img src={'https:' + value.customerIcon.file.url} alt={value.customerIcon.Description} ></img></li>
           ))}
         </ul>
         </header>
