@@ -6,6 +6,7 @@ namespace Persistence
 {
     public class OrganisationDTO
     {
+        public SystemProperties Sys { get; set; }
         public int CustomerId { get; set; }
        
         public string CompanyName { get; set; }

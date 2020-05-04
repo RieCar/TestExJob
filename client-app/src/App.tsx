@@ -26,8 +26,9 @@ class App extends Component {
           {this.state.values.map((value:any)=> (
             <li key ={value.customerId} > {value.companyName}
             <p> {value.customerDescription}</p>
-            <img src={'https:' + value.customerIcon.file.url} alt={value.customerIcon.Description} ></img></li>
+            <img src={'https:' + value.ImageUrl}  ></img></li>
           ))}
+          {/*  alt={value.customerIcon.Description} */}
         </ul>
         </header>
       </div>
