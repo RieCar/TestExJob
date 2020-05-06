@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -12,10 +13,10 @@ namespace Application.Organisations
 {
     public class List
     {
-        public class Query : IRequest<IEnumerable<Organisation>> { }
+        public class Query : IRequest<List<Organisation>> { }
 
 
-        public class Handler : IRequestHandler<Query, IEnumerable<Organisation>>{
+        public class Handler : IRequestHandler<Query, List<Organisation>>{
             private readonly IContentfulClient _client;
 
             public Handler(IContentfulClient client)
@@ -23,7 +24,7 @@ namespace Application.Organisations
                 _client = client;
             }
 
-            public async Task<IEnumerable<Organisation>> Handle(Query request,
+            public async Task<List<Organisation>> Handle(Query request,
             CancellationToken cancellationToken)
             {
                  var qb = QueryBuilder<OrganisationDTO>.New.ContentTypeIs("customerId")
@@ -35,12 +36,20 @@ namespace Application.Organisations
                     var org = new Organisation(); 
                     org.CompanyName = Organisation.CompanyName;
                     org.CustomerDescription = Organisation.CustomerDescription;
-                    org.ImageUrl = Organisation.CustomerIcon.File.Url;
+                    org.ImageUrl = await getImg(Organisation.CustomerIcon.SystemProperties.Id);
                     System.Console.WriteLine(org.ImageUrl);
                     org.CustomerId = Organisation.Sys.Id; 
                     currentList.Add(org);
+                    // "https:" + Organisation.CustomerIcon.File.Url;
                 }
                 return currentList; //model.ToList(); //throw new System.NotImplementedException();
+            }
+
+            private async Task<string> getImg(string id)
+            {
+             var model = await _client.GetAsset(id);
+
+             return model.File.Url;
             }
         }
     }

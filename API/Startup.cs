@@ -18,6 +18,13 @@ using Microsoft.AspNetCore.Identity;
 using Application.User;
 using MediatR;
 using Application.Organisations;
+using Application.Interfaces;
+using Infrastructure.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace API
 {
@@ -45,19 +52,37 @@ namespace API
             services.AddContentful(Configuration);
             services.AddMediatR(typeof(Login.Handler).Assembly);
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddControllers();
+            services.AddControllers(opt => 
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); 
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             var builder = services.AddIdentityCore<ApplicationUser>();
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
             identityBuilder.AddEntityFrameworkStores<UserContext>();
             identityBuilder.AddSignInManager<SignInManager<ApplicationUser>>();
 
+            services.AddScoped<IJwtGenerator, JwtGenerator>(); 
             // services.AddIdentityCore<ApplicationUser>()
             // .AddEntityFrameworkStores<UserContext>()
             // .AddDefaultTokenProviders();
-            services.AddAuthentication();
-        }
 
+            //Using user-secrets for key value
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>{
+
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = key,
+                    ValidateAudience = false,
+                    ValidateIssuer = false
+
+                };
+            });
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -69,9 +94,10 @@ namespace API
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors("CorsPolicy");
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
