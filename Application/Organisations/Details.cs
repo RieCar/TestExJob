@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Contentful.Core;
 using Contentful.Core.Search;
+using Domain;
 using MediatR;
 using Persistence;
 
@@ -11,13 +12,13 @@ namespace Application.Organisations
 {
     public class Details
     {
-        
-        public class Query : IRequest<OrganisationDTO>
+
+        public class Query : IRequest<Organisation>
         {
-             public string CompanyName { get; set; }          
+            public string CompanyName { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, OrganisationDTO>
+        public class Handler : IRequestHandler<Query, Organisation>
         {
             private readonly IContentfulClient _client;
 
@@ -26,12 +27,29 @@ namespace Application.Organisations
                 _client = client;
             }
 
-            public async Task<OrganisationDTO> Handle(Query request, 
+            public async Task<Organisation> Handle(Query request,
             CancellationToken cancellationToken)
             {
-                var builder = new QueryBuilder<OrganisationDTO>().FieldEquals(f => f.CompanyName, request.CompanyName).Include(2);
-                var entry = (await _client.GetEntries(builder)).FirstOrDefault();
-                return entry; 
+                var queryBuilder = QueryBuilder<OrganisationDTO>.New.Include(2)
+                .ContentTypeIs("customerId").FieldEquals("fields.companyName", request.CompanyName);
+                var entry = (await _client.GetEntries(queryBuilder)).FirstOrDefault();
+                // var builder = new QueryBuilder<OrganisationDTO>().FieldEquals(f => f.CompanyName, request.CompanyName).Include(2);
+                // var entry = (await _client.GetEntries(builder)).FirstOrDefault();
+                var currentCompany = new Organisation();
+
+                currentCompany.CustomerId = entry.Sys.Id;
+                currentCompany.CompanyName = entry.CompanyName;
+                currentCompany.ImageUrl = await getImg(entry.CustomerIcon.SystemProperties.Id);
+                currentCompany.CustomerDescription = entry.CustomerDescription;
+
+                return currentCompany;
+            }
+
+            private async Task<string> getImg(string id)
+            {
+                var model = await _client.GetAsset(id);
+
+                return model.File.Url;
             }
         }
     }

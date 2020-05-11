@@ -13,15 +13,14 @@ namespace API.Controllers
     public class OrganisationController : BaseController
     {
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<Organisation>>> List(){
             var result = await Mediator.Send(new List.Query());
            
             return result.ToList();
         }
 
-         [HttpGet("name")]
-        public async Task<ActionResult<OrganisationDTO>> Details(string name){
+         [HttpGet("{name}")]
+        public async Task<ActionResult<Organisation>> Details(string name){
             var result = await Mediator.Send(new Details.Query{CompanyName = name});
            
             return result;

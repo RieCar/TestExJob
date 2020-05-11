@@ -1,26 +1,40 @@
 using System.Threading.Tasks;
+using Application.helpclasses;
 using Application.User;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
-{ 
-  [AllowAnonymous]
+{
+
     public class UserController : BaseController
     {
-     
-      [HttpPost("login")]
-      public async Task<ActionResult<User>> Login(Login.Query query)
-      {
-          return await Mediator.Send(query);
-      }  
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Login(Login.Query query)
+        {
+            //  var cmscheck = new CmsChecker();
+            //  var newUser = await cmscheck.CheckCMS(query.Email,query.Password);
+            return await Mediator.Send(query);
+        }
 
-      //endpoint for contentful webhook to create applicationuser from content. 
-      [HttpPost("create")]
-      public async Task<ActionResult<User>> Create(Create.Command command){
+        //endpoint for contentful webhook to create applicationuser from content.
+        [AllowAnonymous]
+        [HttpPost("create")]
+        public async Task<ActionResult<User>> Create(Create.Command command)
+        {
 
-        return await Mediator.Send(command); 
-      }
+            return await Mediator.Send(command);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<User>> CurrentUser()
+        {
+
+            return await Mediator.Send(new CurrentUser.Query());
+        }
     }
+
+
 }

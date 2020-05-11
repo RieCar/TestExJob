@@ -52,11 +52,12 @@ namespace API
             services.AddContentful(Configuration);
             services.AddMediatR(typeof(Login.Handler).Assembly);
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddControllers(opt => 
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); 
-                opt.Filters.Add(new AuthorizeFilter(policy));
-            });
+            services.AddControllers(); 
+            // services.AddControllers(opt => 
+            // {
+            //     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); 
+            //     opt.Filters.Add(new AuthorizeFilter(policy));
+            // });
 
             var builder = services.AddIdentityCore<ApplicationUser>();
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
@@ -64,10 +65,8 @@ namespace API
             identityBuilder.AddSignInManager<SignInManager<ApplicationUser>>();
 
             services.AddScoped<IJwtGenerator, JwtGenerator>(); 
-            // services.AddIdentityCore<ApplicationUser>()
-            // .AddEntityFrameworkStores<UserContext>()
-            // .AddDefaultTokenProviders();
-
+            services.AddScoped<IAccessUser, AccessUser>(); 
+         
             //Using user-secrets for key value
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

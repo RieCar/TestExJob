@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
+using Contentful.Core;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -29,22 +30,25 @@ namespace Application.User
             private readonly UserContext _context;
             private readonly IJwtGenerator _jwtGenerator;
             private readonly UserManager<ApplicationUser> _userManager;
+            private readonly IContentfulClient _client;
 
-            public Handler(UserContext context, UserManager<ApplicationUser> userManager, IJwtGenerator jwtGenerator)
+            public Handler(UserContext context, UserManager<ApplicationUser> userManager, IJwtGenerator jwtGenerator, IContentfulClient client)
             {
+                _client = client;
                 _userManager = userManager;
                 _jwtGenerator = jwtGenerator;
                 _context = context;
-
             }
 
             public async Task<User> Handle(Command request, CancellationToken cancellationToken)
             {
-                if(await _context.Users.Where(u => u.Email == request.Email).AnyAsync()){
+                if (await _context.Users.Where(u => u.Email == request.Email).AnyAsync())
+                {
                     throw new Exception("the email already exists");
                 }
 
-                if(await _context.Users.Where(u => u.UserName == request.UserName).AnyAsync()){
+                if (await _context.Users.Where(u => u.UserName == request.UserName).AnyAsync())
+                {
                     throw new Exception("the username already exists");
                 }
 
@@ -56,9 +60,10 @@ namespace Application.User
                     OrganisationID = request.Organisation
                 };
 
-                var result = await _userManager.CreateAsync(user, request.Password); 
+                var result = await _userManager.CreateAsync(user, request.Password);
 
-                if(result.Succeeded){
+                if (result.Succeeded)
+                {
                     return new User
                     {
                         DisplayName = user.DisplayName,
@@ -66,7 +71,7 @@ namespace Application.User
                         Token = _jwtGenerator.CreateToken(user),
                         Organisation = user.OrganisationID
 
-                    }; 
+                    };
                 }
 
                 throw new Exception("Problem creating user");

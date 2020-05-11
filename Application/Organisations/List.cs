@@ -27,8 +27,8 @@ namespace Application.Organisations
             public async Task<List<Organisation>> Handle(Query request,
             CancellationToken cancellationToken)
             {
-                 var qb = QueryBuilder<OrganisationDTO>.New.ContentTypeIs("customerId")
-                .Include(4);
+                 var qb = QueryBuilder<OrganisationDTO>.New.ContentTypeIs("customerId").Include(2);
+                
                 var model = await _client.GetEntries(qb);
                 var currentList = new List<Organisation>(); 
                 //mapping
@@ -37,7 +37,6 @@ namespace Application.Organisations
                     org.CompanyName = Organisation.CompanyName;
                     org.CustomerDescription = Organisation.CustomerDescription;
                     org.ImageUrl = await getImg(Organisation.CustomerIcon.SystemProperties.Id);
-                    System.Console.WriteLine(org.ImageUrl);
                     org.CustomerId = Organisation.Sys.Id; 
                     currentList.Add(org);
                     // "https:" + Organisation.CustomerIcon.File.Url;
