@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
 
 // Root Saga and Reducer
-import sagas from './sagas'
+import sagas from './rootSaga'
 import reducers from './rootReducer'
 
 // Initial store

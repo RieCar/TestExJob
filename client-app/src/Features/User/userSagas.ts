@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux';
 import { takeLatest, call, put } from 'redux-saga/effects'
 
 import agent from '../../app/api/agent'
@@ -6,7 +7,7 @@ import agent from '../../app/api/agent'
 import { UserActions, LoginUserSuccess, LoginUserFailure } from './actions';
 
 
-function* handleOnLoginUser(action) {
+function* handleOnLoginUser(action: AnyAction) {
     const loginInformation = action.payload.loginInformation
 
     try {

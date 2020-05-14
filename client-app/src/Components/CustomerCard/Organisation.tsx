@@ -1,42 +1,38 @@
 import React,{useState, useEffect} from "react"
 import axios from 'axios'; 
+import { useSelector } from "react-redux";
 
-import {IOrganisation} from "../../app/models/organisation"
-import store from '../../Features/store'
+import { IOrganisation } from "../../app/models/organisation"
+import { IStore } from "../../app/models/store";
+
 const OrganisationDetail = () => {
  
-
- 
-   // grab current state
-   //const userOrg = window.localStorage.getItem("organisation");
-   const state = store.getState();
- 
-   // get the JWT token out of it
-   // (obviously depends on how your store is structured)
-   const userOrg = state.currentUser.organisation;
-   
+  const userOrganisation = useSelector((store:IStore) => store.currentUser?.organisation)  
   const [selectedorganisation, setselectedOrganistion ] = useState<IOrganisation | null>(null);
   
-useEffect(() =>{
-  axios
-  .get<IOrganisation>('http://localhost:5000/api/organisation/',{
-    params:{
-      name: userOrg
+  useEffect(() =>{
+
+    const data = {
+      params: {
+        name: userOrganisation
+      }
     }
-  })
-    .then((response)=> {
-        setselectedOrganistion(response.data)
-        console.log(response.data)
-    });
-},[]);
+
+    axios
+      .get<IOrganisation>('http://localhost:5000/api/organisation/', data)
+      .then((response)=> {
+          setselectedOrganistion(response.data)
+          console.log(response.data)
+      });
+    
+  }, [userOrganisation]);
 
     return (
       <div className="App">  
-       <h2>Details</h2>
+        <h2>Details</h2>
         <h2>{selectedorganisation?.companyName}</h2>
-    <p> {selectedorganisation?.customerDescription}</p>
-    <img src ={selectedorganisation?.imageUrl}></img>
-          
+        <p>{selectedorganisation?.customerDescription}</p>
+        <img src ={selectedorganisation?.imageUrl} />          
       </div>
     )
   }
