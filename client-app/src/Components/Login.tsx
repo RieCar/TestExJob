@@ -1,65 +1,54 @@
-import React,{Component} from 'react';
-import axios from 'axios'; 
-import {loginUser} from "../Features/actions";
-import store from '../Features/store';
-import agent from '../app/api/agent';
-import { IFormValues } from '../app/models/user';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-class Login extends React.Component{
-  state = {
+import { loginUser } from "../Features/User/actions";
+
+const Login: React.FC = () => {
+  
+  const [form, setForm] = useState({
     email: '',
     password: ''
-  };
-      handleChange= (event:any)=>{
-      if(event.target.name === "email"){
-                  this.setState({ email: event.target.value});
-                }
-                else if(event.target.name === "password"){
-                  this.setState({ password: event.target.value});
-                }
-         
-       
-      }
-      handleSubmit=(event:any)=> {
-        event.preventDefault();
+  })
 
-        let user :IFormValues= {
-          email : this.state.email,
-         password: this.state.password
-        }
+  const dispatch = useDispatch()
 
-             agent.Users.login(user)
-            .then((response) => {          
-              console.log(response);
-              localStorage.setItem("token", response.token)
-              localStorage.setItem("organisation", response.organisation)
-              store.dispatch(loginUser(response));
-          }
-            )}     
-   
-render(){
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target 
+    setForm((prevState) => ({ 
+      ...prevState,
+      [name]: value 
+    }));
+  }
 
-    return(
 
-        <form onSubmit={this.handleSubmit}>
-            <label>
-                Email
-                <input type="text" name="email" onChange={this.handleChange}/>
-            </label>
+  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if ( form.email && form.password ) {
+      dispatch(loginUser(form))
+    }
+  }
 
-            <label>
-                Lösenord
-                <input type="password" name="password" onChange={this.handleChange} />
-            </label>
-            <input type="submit" value="Logga in"/>
-            <p>
-                Forgot <a href="#">password?</a>
-            </p>
+  return (
 
-        </form>
+    <form onSubmit={handleOnSubmit}>
+          <label>
+        Email
+              <input type="text" name="email" onChange={handleOnChange}/>
+          </label>
 
-    )
-}
+          <label>
+              Lösenord
+              <input type="password" name="password" onChange={handleOnChange} />
+          </label>
+          <input type="submit" value="Logga in"/>
+          <p>
+              Forgot <a href="#">password?</a>
+          </p>
+
+      </form>
+
+  )
+
 }
 
 

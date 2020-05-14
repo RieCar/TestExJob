@@ -1,13 +1,11 @@
-export interface IUser{
-
+export interface IUser {
     username: string, 
     displayname: string,
     token: string,
     organisation: string
-
 }
 
-export interface IFormValues{
+export interface IFormValues {
     email: string,
     password:string,
     displayname?:string,
