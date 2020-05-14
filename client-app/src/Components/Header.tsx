@@ -2,24 +2,19 @@ import React from 'react'
 
 import Login from "../Components/Login";
 import Register from "../Components/Register";
+import { NavBar } from './nav/NavBar';
 
-export const Header = () => {
+export const Header = (...store:any) => {
 
 
 
 return (
 <header>
    <h1>Customer Portal </h1>
-   <Login/>
-   <Register/>
-<nav>
-    {/* <ul>
-        <li> Summery </li>
-        <li> Organisation </li>
-        <li> Projects </li>
-        <li> Orders </li>
-    </ul> */}
-</nav>
+   <NavBar/>
+   {/* <Login/>
+   <Register/> */}
+
 </header>
 
 

@@ -1,39 +1,37 @@
 import React,{useState, useEffect} from 'react';
-import axios from 'axios'; 
-
+import {Provider} from 'react-redux';
+import store from "../Features/store";
 import {Header} from "../Components/Header";
 import {IOrganisation} from "../app/models/organisation"
+import agent from './api/agent';
 
 const App = () => {
  
   const [organisation, setOrganistion ] = useState<IOrganisation[]>([]);
-  
+  const currentUserorg = store.currentUser?.organisation; 
 useEffect(() =>{
-  axios
-  .get<IOrganisation[]>('http://localhost:5000/api/organisation')
+ agent.Organisations.details(currentUserorg)
     .then((response)=> {
-      setOrganistion(response.data)
+      setOrganistion(response)
     });
 },[]);
 
     return (
+      <Provider store ={store}> 
       <div className="App">  
-      <Header/>
+      <Header {...store}/>
         <ul>
           {organisation.map((organisation)=> (
             <li key ={organisation.customerId} > {organisation.companyName}
             <p> {organisation.customerDescription}</p>
             <img src={'http:' + organisation.imageUrl} alt="" ></img></li>
-           
-          ))}
         
-        </ul>
-   
-      
+          ))}       
+        </ul>   
       </div>
+      </Provider>
     )
   }
-
 
 
 export default App;

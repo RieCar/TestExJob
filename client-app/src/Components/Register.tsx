@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios'; 
 import { runInThisContext } from 'vm';
+import { IFormValues } from '../app/models/user';
 
 export default class Register extends React.Component<{}, {firstname:string, lastname:string,email:string, password:string, organisation:string}>{
 
@@ -56,11 +57,12 @@ export default class Register extends React.Component<{}, {firstname:string, las
       }
       handleSubmit(event:any) {
         event.preventDefault();
-        let user = {
-          Username: this.state.firstname + this.state.lastname,
-          Email: this.state.email,
-          Password : this.state.password,
-          Organisation: this.state.organisation
+        let user :IFormValues= {
+            username: this.state.firstname + this.state.lastname,
+            email: this.state.email,
+            password: this.state.password,
+            organisation: this.state.organisation
+
         }
 
         var config = {

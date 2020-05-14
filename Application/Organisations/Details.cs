@@ -30,8 +30,8 @@ namespace Application.Organisations
             public async Task<Organisation> Handle(Query request,
             CancellationToken cancellationToken)
             {
-                var queryBuilder = QueryBuilder<OrganisationDTO>.New.Include(2)
-                .ContentTypeIs("customerId").FieldEquals("fields.companyName", request.CompanyName);
+                var queryBuilder = QueryBuilder<OrganisationDTO>.New
+                .ContentTypeIs("customerId").FieldEquals(f => f.CompanyName, request.CompanyName);
                 var entry = (await _client.GetEntries(queryBuilder)).FirstOrDefault();
                 // var builder = new QueryBuilder<OrganisationDTO>().FieldEquals(f => f.CompanyName, request.CompanyName).Include(2);
                 // var entry = (await _client.GetEntries(builder)).FirstOrDefault();
