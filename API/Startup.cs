@@ -67,8 +67,10 @@ namespace API
             services.AddScoped<IJwtGenerator, JwtGenerator>(); 
             services.AddScoped<IAccessUser, AccessUser>(); 
          
-            //Using user-secrets for key value
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
+            // Using user-secrets for key value
+            var tokenKey = Encoding.UTF8.GetBytes(Configuration["TokenKey"]);
+            var key = new SymmetricSecurityKey(tokenKey);
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt =>{
 

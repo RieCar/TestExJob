@@ -45,7 +45,6 @@ namespace Application.helpclasses
                     UserName = isNewUser.FirstName,
                     Email = isNewUser.Email,
                     OrganisationID = isNewUser.Organisation
-
                 };
 
                 var result = await _userManager.CreateAsync(user, isNewUser.Password);
