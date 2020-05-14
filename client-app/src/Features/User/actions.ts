@@ -17,7 +17,7 @@ export const LoginUserSuccess = (user: IUser) => ({
 })
 
 export const LoginUserFailure = (error: string) => ({
-    type: UserActions.LOGIN_USER_SUCCESS,
+    type: UserActions.LOGIN_USER_FAILURE,
     payload: { error },
     error: true
 })
