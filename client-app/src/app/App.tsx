@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Components
 import {Header} from "../Components/Header";
@@ -10,11 +10,6 @@ import { IStore } from '../app/models/store'
 
 // API
 import agent from './api/agent';
-
-// Redux
-import { initializeStore } from '../Features/store'
-
-const store = initializeStore()
 
 const App: React.FC = () => {
  
@@ -35,18 +30,18 @@ const App: React.FC = () => {
   }, [currentUserOrganization]);
 
   return (
-    <Provider store ={store}> 
-      <div className="App">  
-        <Header />
-        {organisation && (
-          <ul>          
-            <li key ={organisation.customerId} > {organisation.companyName}
-            <p> {organisation.customerDescription}</p>
-            <img src={'http:' + organisation.imageUrl} alt="" ></img></li>                
-          </ul>
-        )}
-      </div>
-    </Provider>
+    <div className="App">  
+      <Header />
+      {organisation && (
+        <ul>          
+          <li>
+            <h3>{organisation.companyName}</h3>
+            <p>{organisation.customerDescription}</p>
+            <img src={'http:' + organisation.imageUrl} alt="" ></img>
+          </li>
+        </ul>
+      )}
+    </div>
   )
 }
 export default App;
