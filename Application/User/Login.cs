@@ -15,7 +15,7 @@ namespace Application.User
     public class Login
     {
         public class Query : IRequest<User>
-        {
+        {            
             public string Email { get; set; }
             public string Password { get; set; }
         }
@@ -40,10 +40,13 @@ namespace Application.User
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
                 {
-                    var queryBuilder = QueryBuilder<Contact>.New.ContentTypeIs("contact");
-                    var entries = await _client.GetEntries(queryBuilder);
+                    var queryBuilder = QueryBuilder<Contact>.New
+                        .ContentTypeIs("contact")
+                        .FieldEquals("fields.email", request.Email);
 
-                    var isNewUser = entries.Where(x => x.Email.Equals(request.Email)).FirstOrDefault();
+                    var entries = await _client.GetEntries(queryBuilder);                                             
+
+                    var isNewUser = entries.Where(entry => entry.Email.Equals(request.Email)).FirstOrDefault();
                     if (isNewUser != null)
                     {
                        var checkers = new CmsChecker();

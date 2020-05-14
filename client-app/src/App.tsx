@@ -2,11 +2,11 @@ import React,{useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
 // Components
-import {Header} from "../Components/Header";
+import {Header} from "./Components/Header";
 
 // Models
-import {IOrganisation} from "../app/models/organisation"
-import { IStore } from '../app/models/store'
+import {IOrganisation} from "./models/organisation"
+import { IStore } from './models/store'
 
 // API
 import agent from './api/agent';

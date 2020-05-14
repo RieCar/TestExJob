@@ -2,8 +2,8 @@ import React,{useState, useEffect} from "react"
 import axios from 'axios'; 
 import { useSelector } from "react-redux";
 
-import { IOrganisation } from "../../app/models/organisation"
-import { IStore } from "../../app/models/store";
+import { IOrganisation } from "../../models/organisation"
+import { IStore } from "../../models/store";
 
 const OrganisationDetail = () => {
  

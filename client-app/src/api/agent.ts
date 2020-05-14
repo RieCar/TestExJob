@@ -9,10 +9,8 @@ axios.interceptors.request.use((config) => {
     const token = window.localStorage.getItem("token");
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-        return config
-    } else {
-        return Promise.reject('A token must be given in order to request');
     }
+    return config;
 });
 
 // Get data from the response
@@ -42,7 +40,7 @@ const Organisations = {
  */
 const Users ={
     current: () => requests.get<IUser>('/user'),
-    login: (user: IFormValues) => requests.post<IUser>(`/user/login`, user),
+    login: (loginInformation: { name: string, password: string }) => requests.post<IUser>(`/user/login`, loginInformation),
     create: (user: IFormValues) => requests.post<IUser>(`/user/create`, user)
 }
 

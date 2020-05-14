@@ -11,5 +11,4 @@ export interface IFormValues {
     displayname?:string,
     username?: string,
     organisation?: string
-
 }
