@@ -1,21 +1,9 @@
-import React from 'react'
-
-import { NavBar } from './nav/NavBar';
-
+import React from "react";
 
 export const Header = () => {
-
-
-
-return (
-<header>
-   <h1>Customer Portal </h1>
-   <NavBar/>
-
-
-</header>
-
-
-)
-
-}
+  return (
+    <header className="header">
+      <h1>Customer Portal </h1>
+    </header>
+  );
+};

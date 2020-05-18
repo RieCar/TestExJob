@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Provider } from "react-redux";
-import store from "../Features/store";
+import React, { useState, useEffect, Fragment } from "react";
 
 import { IOrganisation } from "../app/models/organisation";
 // import agent from "./api/agent";
 
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import HomePage from "../Components/home/HomePage";
-import { Card } from "../Components/CustomerCard/Card";
+import Card from "../Components/CustomerCard/Card";
+import { NavBar } from "../Components/nav/NavBar";
 
-function App () {
+function App() {
   const [organisation, setOrganistion] = useState<IOrganisation[]>([]);
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState(false);
 
-  const handleLogin= (e:any)=> {
+  const handleLogin = (e: any) => {
     e.preventDefault();
     var isLoggedIn = localStorage.getItem("token");
-    if(isLoggedIn){
+    if (isLoggedIn) {
       setUser(true);
     }
- 
-  }
+  };
 
-  const handleLogout = (e:any) => {
+  const handleLogout = (e: any) => {
     e.preventDefault();
     localStorage.removeItem("token");
     setUser(false);
@@ -35,15 +33,24 @@ function App () {
   // }, []);
 
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Router> 
-      <Route exact path='/'component={HomePage}/> 
-      <Route exact path='/Card' component={Card}/>
-      {/* <Route path='/Login'onclick={Login} component={Login}/> */}
-      </Router>
-           
-        {/* <ul>
+    <div className="App">
+      <Fragment>
+        <Router>
+          <Route exact path="/" component={HomePage} />
+          <Route
+            path={"/(.+)"}
+            render={() => (
+              <Fragment>
+                <NavBar />
+                <Route exact path="/Card" component={Card} />
+              </Fragment>
+            )}
+          />
+            {/* {" "} */}
+          {/* </Route> */}
+        </Router>
+      </Fragment>
+      {/* <ul>
           {organisation.map((organisation) => (
             <li key={organisation.customerId}>
               {" "}
@@ -53,9 +60,8 @@ function App () {
             </li>
           ))}
         </ul> */}
-      </div>
-    </Provider>
+    </div>
   );
-};
+}
 
 export default App;

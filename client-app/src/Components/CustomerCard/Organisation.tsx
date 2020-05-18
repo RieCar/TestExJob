@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 import { IOrganisation } from "../../app/models/organisation";
-import store from "../../Features/store";
+import {initializeStore} from "../../Features/store";
 import agent from "../../app/api/agent";
 const OrganisationDetail = () => {
   // grab current state
-  //const userOrg = window.localStorage.getItem("organisation");
-  const state = store.getState();
+  const userOrg = window.localStorage.getItem("organisation");
+  // const state = store.getState();
 
   // get the orgid out 
-  const userOrg = state.currentUser?.organisation;
+  //const userOrg = state.currentUser?.organisation;
   console.log(userOrg);
   const [selectedorganisation, setselectedOrganistion,] = useState<IOrganisation | null>(null);
 

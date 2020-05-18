@@ -6,12 +6,13 @@ import {
   Link,
   Switch,
   NavLink,
+  useHistory,
 } from "react-router-dom";
 import Login from "../Login";
 import { IUser } from "../../app/models/user";
 import agent from "../../app/api/agent";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../Features/actions";
+import { logoutUser } from "../../Features/useractions";
 
 export const NavBar = () => {
   const [user, setUser] = useState<IUser | null>(null);
@@ -25,15 +26,22 @@ export const NavBar = () => {
     });
   }, []);
 
+  const history = useHistory(); 
+
   const handleOnClick = (e: any) => {
     e.preventDefault();
-    window.localStorage.removeItem("token");
     dispatch(logoutUser());
+    history.push('/');
   };
 
   return (
-    <div>
-      {user ? (
+    <div className="navbar">
+      <Fragment> 
+      <nav>
+        <ul>
+          <li><NavLink exact to='/'> Home </NavLink></li>
+          <li><NavLink exact to='/Card'>View Dashboard Protected</NavLink></li>
+          <li>{user ? (
         <Fragment>
           {" "}
           <button onClick={handleOnClick}>Log Out </button>{" "}
@@ -45,15 +53,13 @@ export const NavBar = () => {
             Log In
           </NavLink>{" "}
         </Fragment>
-      )}
-
-      <p>
-        <NavLink to="/Card">View Dashboard</NavLink>
-      </p>
-
-      <i className="far fa-user"></i>
-      <p> {user?.displayname}</p>
-      <p> {user?.username}</p>
+      )}</li>
+      <li>    <i className="far fa-user"></i></li>
+        </ul>
+      </nav>  
+      {/* <p> {user?.displayname}</p>
+      <p> {user?.username}</p> */}
+      </Fragment>
     </div>
   );
 };

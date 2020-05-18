@@ -26,18 +26,18 @@ export const LoginUserFailure = (error: string) => ({
     error: true
 })
 
-export const logoutUser = (userObj:any) => ({
-    type: 'LOGIN_USER',
-    payload: {loginformation: userObj}
+export const logoutUser = () => ({
+    type: 'LOGOUT_USER',
+    payload: {}
 })
 
-export const LogoutUserSuccess = (user: IUser) => ({
+export const LogoutUserSuccess = () => ({
     type: UserActions.LOGIN_USER_SUCCESS,
-    payload: { user }
+    payload: {information: "utloggad"}
 })
 
-export const LogoutUserFailure = (error: string) => ({
-    type: UserActions.LOGIN_USER_FAILURE,
-    payload: { error },
-    error: true
-})
+// export const LogoutUserFailure = (error: string) => ({
+//     type: UserActions.LOGIN_USER_FAILURE,
+//     payload: { error },
+//     error: true
+// })

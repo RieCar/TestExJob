@@ -1,13 +1,19 @@
-import React from 'react'
-import OrganisationDetail from './Organisation'
+import React from "react";
+import OrganisationDetail from "./Organisation";
+// import { Header } from "../Header";
+// import { NavBar } from "../nav/NavBar";
 
-export const Card = () => {
-    return (
-        <div className="maincard">
-        <h1>Dashboard</h1>
-        <p>Secret Page</p>
-        {/* <button>Log Out</button> */}
-          <OrganisationDetail/>  
-        </div>
-    )
-}
+ const Card = () => {
+  return (
+    <div className="maincard">
+      {/* <Header /> 
+      <NavBar /> */}
+      <h1>Dashboard</h1>
+      <p>Secret Page</p>
+      {/* <button>Log Out</button> */}
+      <OrganisationDetail />
+    </div>
+  );
+};
+
+export default Card; 
