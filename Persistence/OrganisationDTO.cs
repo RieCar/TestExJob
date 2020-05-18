@@ -14,8 +14,10 @@ namespace Persistence
 
         public string CustomerDescription { get; set; }  
          
-        public List<ProjectDTO> ProjectsId { get; set; }
+        public List<ProjectDTO> Projects { get; set; }
 
-        // public List<Order> Orders { get; set; }
+         public List<OrderDTO> Orders { get; set; }
+
+         public List<ContractDTO> Contracts { get; set; }
     }
 }

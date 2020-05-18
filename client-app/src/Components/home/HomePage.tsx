@@ -1,9 +1,11 @@
 import React from 'react'
-
+import '../../app/layout/index.css';
+import { Header } from '../Header';
 export default function HomePage() {
     return (
-        <div style={{marginTop:'7em'}}>
-            <h1> Homepage</h1>
+        <div className="home">
+              <Header />
+
         </div>
     )
 }

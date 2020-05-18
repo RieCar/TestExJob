@@ -31,6 +31,7 @@ const Organisations ={
 const Users ={
     current: ():Promise<IUser> => requests.get('/user'),
     login: (user:IFormValues):Promise<IUser>=>requests.post(`/user/login`,user),
+    // checkUser: (user:IFormValues):Promise<IUser>=>requests.post(`/user/valid`,user),
     create: (user:IFormValues):Promise<IUser> => requests.post(`/user/create`,user)
 }
 

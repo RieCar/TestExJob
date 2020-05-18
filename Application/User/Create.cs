@@ -59,7 +59,7 @@ namespace Application.User
                     Email = request.Email,
                     OrganisationID = request.Organisation
                 };
-
+Console.WriteLine(user.DisplayName +  request.Password);
                 var result = await _userManager.CreateAsync(user, request.Password);
 
                 if (result.Succeeded)

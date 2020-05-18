@@ -7,8 +7,7 @@ namespace Domain
          public string Titel { get; set; }
          public bool IsUser { get; set; }
          public string Email { get; set; }
-
-    public string Organisation { get; set; }
+         public Organisation Organisation { get; set; }
          public string Password { get; set; }
     }
 }

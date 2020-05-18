@@ -20,31 +20,34 @@ namespace Application.helpclasses
 
         public IJwtGenerator _jwtGenerator { get; set; }
 
-        public async Task<Contact> CheckCMS(string email, string password)
+        public async Task<ContactDTO> CheckCMS(string email, string password)
         {
-            var queryBuilder = QueryBuilder<Contact>.New.ContentTypeIs("contact");
+            var queryBuilder = QueryBuilder<ContactDTO>.New.Include(2).ContentTypeIs("contact");
             var entries = await _client.GetEntries(queryBuilder);
       
             var isNewUser = entries.Where(x=> x.Email.Equals(email)).FirstOrDefault(); 
-            if (isNewUser != null)
+            if (isNewUser != null && isNewUser.Password.Equals(password))
             {
-                var users = CheckIdentity(isNewUser);
+                var users = CheckIdentity(isNewUser); 
+                return isNewUser; 
             }
-
-            return isNewUser; 
-       // throw new Exception("Problem finding user");
+            var fakeC = new ContactDTO();
+            fakeC.FirstName = "fakeName";
+         
+           return fakeC;
+            // throw new Exception("Problem finding user");
         }
 
-        public async Task<User.User> CheckIdentity(Contact isNewUser)
+        public async Task<User.User> CheckIdentity(ContactDTO isNewUser)
         {
-            if (!await _context.Users.Where(u => u.Email == isNewUser.Email).AnyAsync())
-            {
+            Console.WriteLine(isNewUser.LastName + isNewUser.Organisation.Sys.Id);
+
                 var user = new ApplicationUser()
                 {
                     DisplayName = isNewUser.FirstName + isNewUser.LastName,
                     UserName = isNewUser.FirstName,
                     Email = isNewUser.Email,
-                    OrganisationID = isNewUser.Organisation
+                    OrganisationID = isNewUser.Organisation.Sys.Id
 
                 };
 
@@ -61,8 +64,9 @@ namespace Application.helpclasses
 
                     };
                 }
-            }
-              throw new Exception("Problem creating user");
+                throw new Exception("Problem creating user");
         }
+              
     }
+    
 }

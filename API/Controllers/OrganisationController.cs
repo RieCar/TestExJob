@@ -20,9 +20,9 @@ namespace API.Controllers
             return result.ToList();
         }
         [Authorize]
-         [HttpGet("{name}")]
-        public async Task<ActionResult<Organisation>> Details(string name){
-            var result = await Mediator.Send(new Details.Query{CompanyName = name});
+         [HttpGet("{id}")]
+        public async Task<ActionResult<Organisation>> Details(string id){
+            var result = await Mediator.Send(new Details.Query{Organisation = id});
            
             return result;
         }

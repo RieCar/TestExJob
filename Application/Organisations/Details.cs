@@ -15,7 +15,7 @@ namespace Application.Organisations
 
         public class Query : IRequest<Organisation>
         {
-            public string CompanyName { get; set; }
+            public string Organisation { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Organisation>
@@ -31,7 +31,7 @@ namespace Application.Organisations
             CancellationToken cancellationToken)
             {
                 var queryBuilder = QueryBuilder<OrganisationDTO>.New
-                .ContentTypeIs("customerId").FieldEquals(f => f.CompanyName, request.CompanyName);
+                .ContentTypeIs("customerId").FieldEquals(f => f.Sys.Id, request.Organisation);
                 var entry = (await _client.GetEntries(queryBuilder)).FirstOrDefault();
                 // var builder = new QueryBuilder<OrganisationDTO>().FieldEquals(f => f.CompanyName, request.CompanyName).Include(2);
                 // var entry = (await _client.GetEntries(builder)).FirstOrDefault();

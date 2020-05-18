@@ -52,12 +52,13 @@ namespace API
             services.AddContentful(Configuration);
             services.AddMediatR(typeof(Login.Handler).Assembly);
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddControllers(); 
-            // services.AddControllers(opt => 
-            // {
-            //     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); 
-            //     opt.Filters.Add(new AuthorizeFilter(policy));
-            // });
+            // services.AddControllers(); 
+            //adds policy to check auth on every controller, except the allow anonymous.
+            services.AddControllers(opt => 
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); 
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             var builder = services.AddIdentityCore<ApplicationUser>();
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
@@ -88,6 +89,7 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
 
             //app.UseHttpsRedirection();

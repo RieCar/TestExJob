@@ -14,8 +14,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(Login.Query query)
         {
-            //  var cmscheck = new CmsChecker();
-            //  var newUser = await cmscheck.CheckCMS(query.Email,query.Password);
+
             return await Mediator.Send(query);
         }
 

@@ -3,7 +3,8 @@ export interface IUser{
     username: string, 
     displayname: string,
     token: string,
-    organisation: string
+    organisation: string,
+    isValid?: string
 
 }
 
@@ -13,5 +14,6 @@ export interface IFormValues{
     displayname?:string,
     username?: string,
     organisation?: string
+   
 
 }
