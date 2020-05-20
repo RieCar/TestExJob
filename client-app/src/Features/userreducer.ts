@@ -1,18 +1,22 @@
-import { AnyAction } from 'redux'
+import { AnyAction } from "redux";
 
 import { UserActions } from "./useractions";
 
-const initialState = {}
+const initialState = {};
 
 export default function userReducer(state = initialState, action: AnyAction) {
-    switch (action.type) {
-        case UserActions.LOGIN_USER:
-           return  action.payload.loginformation
-        case UserActions.LOGIN_USER_SUCCESS:
-            return action.payload.user
-        case UserActions.LOGOUT_USER_SUCCESS:
-            return null
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case UserActions.LOGIN_USER:
+      return action.payload.loginformation;
+    case UserActions.LOGIN_USER_SUCCESS:
+      return action.payload.user;
+    case UserActions.LOGIN_USER_FAILURE:
+    return action.payload.error; 
+    case UserActions.LOGOUT_USER:
+      return null;
+    case UserActions.LOGOUT_USER_SUCCESS:
+      return null;
+    default:
+      return state;
+  }
 }

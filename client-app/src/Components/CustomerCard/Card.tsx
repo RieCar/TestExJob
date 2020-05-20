@@ -1,17 +1,18 @@
 import React from "react";
 import OrganisationDetail from "./Organisation";
-// import { Header } from "../Header";
-// import { NavBar } from "../nav/NavBar";
+import SideBar from "../../app/layout/SideBar";
+
 
  const Card = () => {
   return (
     <div className="maincard">
-      {/* <Header /> 
-      <NavBar /> */}
-      <h1>Dashboard</h1>
-      <p>Secret Page</p>
-      {/* <button>Log Out</button> */}
+      <div className="aside" > 
+        <SideBar/>
+    
+      </div>
+      <div className="main_orgside"> 
       <OrganisationDetail />
+      </div>
     </div>
   );
 };

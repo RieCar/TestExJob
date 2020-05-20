@@ -4,5 +4,6 @@ export interface IOrganisation{
     companyName:string; 
     imageUrl: string; 
     customerDescription:string; 
+    projects: any[];
 
 }

@@ -4,11 +4,9 @@ namespace Domain
 {
     public class Project
     {
-        public string ProjectId { get; set; }
-        public string ProjectTitel { get; set; }
+        public string Id { get; set; }
+        public string Titel { get; set; }
+        public string Description { get; set; }
 
-        public Document ProjectDescription { get; set; }
-
-        // public string ProjectStatusId { get; set; }
     }
 }

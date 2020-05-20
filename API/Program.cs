@@ -22,7 +22,7 @@ namespace API
    
             using ( var scope = host.Services.CreateScope()){
                 var services = scope.ServiceProvider; 
-
+//Checks if there is a database, if not it will create one
                 try{
                     var context = services.GetRequiredService<UserContext>();
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();

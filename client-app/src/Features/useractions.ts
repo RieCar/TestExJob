@@ -1,4 +1,5 @@
 import {IUser} from "../app/models/user";
+// import { actionChannel } from "redux-saga/effects";
 
 export enum UserActions{
     LOGIN_USER = 'LOGIN_USER',
@@ -6,8 +7,6 @@ export enum UserActions{
     LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE',
     LOGOUT_USER = 'LOGOUT_USER',
     LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS',
-    LOGOUT_USER_FAILURE = 'LOGOUT_USER_FAILURE',
-
 }
 
 export const loginUser = (userObj:any) => ({
@@ -28,13 +27,17 @@ export const LoginUserFailure = (error: string) => ({
 
 export const logoutUser = () => ({
     type: 'LOGOUT_USER',
-    payload: {}
+    payload: {user: {}}
 })
 
 export const LogoutUserSuccess = () => ({
-    type: UserActions.LOGIN_USER_SUCCESS,
+    type: UserActions.LOGOUT_USER_SUCCESS,
     payload: {information: "utloggad"}
 })
+
+
+
+
 
 // export const LogoutUserFailure = (error: string) => ({
 //     type: UserActions.LOGIN_USER_FAILURE,

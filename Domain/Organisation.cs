@@ -5,13 +5,18 @@ namespace Domain
 {
     public class Organisation
     {
-        public string CustomerId { get; set; }
-       
-        public string CompanyName { get; set; }
-        public string ImageUrl { get; set; }   
 
-        public string CustomerDescription { get; set; }  
-         
+        public Organisation()
+        {
+            Projects = new List<Project>();
+        }
+        public string CustomerId { get; set; }
+
+        public string CompanyName { get; set; }
+        public string ImageUrl { get; set; }
+
+        public string CustomerDescription { get; set; }
+
         public List<Project> Projects { get; set; }
 
         public List<Order> Orders { get; set; }

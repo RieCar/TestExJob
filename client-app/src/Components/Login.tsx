@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { loginUser } from "../Features/useractions";
-// import store from "../Features/store";
-import { IFormValues } from "../app/models/user";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+
 
 const Login: React.FC = () => {
   const [form, setForm] = useState({
@@ -10,8 +10,12 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch(); 
+  let history = useHistory();
+  let location = useLocation();
+ 
+  var organisation = window.localStorage.getItem('organisation');
+ 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm((prevState) => ({
@@ -29,22 +33,10 @@ const Login: React.FC = () => {
     // };
     if (form.email && form.password) {
       dispatch(loginUser(form));
+      history.push({pathname:"/Card", state: organisation});
     }
   };
-  // const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   if ( form.email && form.password ) {
-  //     agent.Users.login(form).then((response) => {
-  //     console.log(response);
-  //     if(response != null){
-  //       localStorage.setItem("token", response.token);
-  //       localStorage.setItem("org", response.organisation);
-  //       dispatch(loginUser(response));
-  //     }
-  //     else return false;
-  //   });
-  //   }
-  // }
+
 
   return (
     <form onSubmit={handleOnSubmit}>

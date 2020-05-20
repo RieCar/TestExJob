@@ -1,10 +1,10 @@
 export interface IUser{
 
-    username: string, 
-    displayname: string,
+    userName: string, 
+    displayName: string,
     token: string,
     organisation: string,
-    isValid?: string
+    isLoggedIn?: boolean
 
 }
 

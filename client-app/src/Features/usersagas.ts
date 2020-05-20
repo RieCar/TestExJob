@@ -36,11 +36,12 @@ function* handleOnLogOutUser(action: AnyAction) {
   yield put(LogoutUserSuccess());
 }
 
+ 
 // function* mySaga(){
 //   yield takeLatest(UserActions.LOGIN_USER, handleOnLoginUser)
 // }
 // export default mySaga;
 export const userSagas = [  
    takeLatest(UserActions.LOGIN_USER, handleOnLoginUser),
-   takeLatest(UserActions.LOGOUT_USER, handleOnLogOutUser)
+   takeLatest(UserActions.LOGOUT_USER, handleOnLogOutUser),
 ]
