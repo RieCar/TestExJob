@@ -5,6 +5,10 @@ import { IContact } from "../models/contact";
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+axios.interceptors.response.use(undefined, error =>{
+    console.log(error);
+})
+
 axios.interceptors.request.use((config) => {
 const token = window.localStorage.getItem("token");
 if(token)config.headers.Authorization = `Bearer ${token}`;

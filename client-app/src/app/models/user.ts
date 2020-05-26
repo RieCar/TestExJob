@@ -4,7 +4,8 @@ export interface IUser{
     displayName: string,
     token: string,
     organisation: string,
-    isLoggedIn?: boolean
+    isLoggedIn?: boolean,
+
 
 }
 

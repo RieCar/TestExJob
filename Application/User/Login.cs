@@ -1,7 +1,10 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Application.helpclasses;
 using Application.Interfaces;
 using Contentful.Core;
@@ -18,7 +21,9 @@ namespace Application.User
     {
         public class Query : IRequest<User>
         {
+ 
             public string Email { get; set; }
+ 
             public string Password { get; set; }
         }
 
@@ -46,9 +51,10 @@ namespace Application.User
                 if (user == null)
                 {
                     var newUser = await CheckCMS(request);
-                    if (newUser.Error != "")
+                    if (newUser == null) 
                     {
-                        return newUser;
+                        throw new RestExceptions(HttpStatusCode.NotFound, new {user = "Not found"});
+                    
                     }
                  
                      user = await CreateUser(newUser);
@@ -64,10 +70,11 @@ namespace Application.User
                         UserName = user.UserName
                     };
                 }
-                return new User
-                {
-                    Error = "Inloggningen misslyckades, kontrollera uppgifter"
-                };
+                throw new RestExceptions(HttpStatusCode.Unauthorized);
+                // return new User
+                // {
+                //     Error = "Inloggningen misslyckades, kontrollera uppgifter"
+                // };
 
             }
 
@@ -79,9 +86,10 @@ namespace Application.User
 
                 if (entry == null)
                 {
-                    return new User() {
-                        Error ="Finns ingen användare med de uppgifterna"
-                     };
+                    return null; 
+                   // return new User() {
+                        //Error ="Finns ingen användare med de uppgifterna"
+                   //  };
                 }
                User createUser = new User()
                     {

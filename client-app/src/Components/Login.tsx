@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { loginUser } from "../Features/useractions";
-import { useDispatch} from "react-redux";
+import { loginUser, LoginUserFailure } from "../Features/useractions";
+import { useDispatch, useSelector} from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import { IStore } from "../app/models/store";
 
 
 const Login: React.FC = () => {
@@ -10,6 +11,10 @@ const Login: React.FC = () => {
     password: "",
   });
 
+  const currentUser = useSelector(
+    (store: IStore) => store.currentUser
+  );
+  
   const dispatch = useDispatch(); 
   let history = useHistory();
   let location = useLocation();
@@ -35,11 +40,17 @@ const Login: React.FC = () => {
       dispatch(loginUser(form));
       history.push({pathname:"/Card", state: organisation});
     }
+    else{ //if either email or password is empty no request goes off
+     dispatch(LoginUserFailure("Du behöver fylla i båda fälten"));
+    }
   };
 
 
   return (
     <form onSubmit={handleOnSubmit}>
+      {currentUser ? (
+        <p> {currentUser.displayName}</p>
+      ) : <p> </p> }
       <label>
         Email
         <input type="text" name="email" onChange={handleOnChange} />

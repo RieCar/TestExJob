@@ -25,7 +25,7 @@ function* handleOnLoginUser(action: AnyAction) {
     }
   } catch (error) {
     console.log(error);
-    yield put(LoginUserFailure(error.message));
+    yield put(LoginUserFailure(error));
   }
 }
 
