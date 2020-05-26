@@ -1,6 +1,7 @@
 import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
 import { IOrganisation } from "../models/organisation";
 import { IUser, IFormValues } from "../models/user";
+import { IContact } from "../models/contact";
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -35,7 +36,12 @@ const Users ={
     create: (user:IFormValues):Promise<IUser> => requests.post(`/user/create`,user)
 }
 
+const Contacts ={
+    getAllByOrg: (id:string):Promise<IContact> => requests.get(`/contact/${id}` )
+}
+
 export default {
     Organisations,
-    Users
+    Users,
+    Contacts
 }

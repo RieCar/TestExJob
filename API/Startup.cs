@@ -25,6 +25,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Application.Contacts;
 
 namespace API
 {
@@ -52,6 +53,7 @@ namespace API
             services.AddContentful(Configuration);
             services.AddMediatR(typeof(Login.Handler).Assembly);
             services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddMediatR(typeof(GetAllForOrg.Handler).Assembly);
             // services.AddControllers(); 
             //adds policy to check auth on every controller, except the allow anonymous.
             services.AddControllers(opt => 

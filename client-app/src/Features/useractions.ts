@@ -27,7 +27,7 @@ export const LoginUserFailure = (error: string) => ({
 
 export const logoutUser = () => ({
     type: 'LOGOUT_USER',
-    payload: {user: {}}
+    payload: {user: {}, contact: {}}
 })
 
 export const LogoutUserSuccess = () => ({

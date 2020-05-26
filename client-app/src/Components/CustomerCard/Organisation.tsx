@@ -1,36 +1,73 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 
-import { IOrganisation } from "../../app/models/organisation";
-// import {initializeStore} from "../../Features/store";
-import agent from "../../app/api/agent";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { IStore } from "../../app/models/store";
-const OrganisationDetail = () => {
-  
-  const [organisation, setOrganistion ] = useState<IOrganisation | null>(null);
-  const currentUserOrganization = useSelector((store: IStore) => store.currentUser?.organisation)
-  
+import { getCurrent } from "../../Features/orgactions";
+import Contact from "./Contact";
+import { getAllByOrg } from "../../Features/contactactions";
+import { IContact } from "../../app/models/contact";
+import { map } from "lodash/fp";
+
+const OrganisationDetail: React.FC = () => {
+  const currentUserOrganization = useSelector(
+    (store: IStore) => store.currentUser?.organisation
+  );
+  const organisation = useSelector((store: IStore) => store.currentOrg);
+
+  const currentContacts = useSelector((store: IStore) => store.currentContacts);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (currentUserOrganization) {
-      agent.Organisations.details(currentUserOrganization).then((response) => {
-        setOrganistion(response);
-        console.log(response);
-      });
+      dispatch(getCurrent(currentUserOrganization));
     }
   }, [currentUserOrganization]);
 
+  function ListItems(props: any) {
+    var currentList = props.items;
+    const list = (
+      <div>
+        <ul>
+          {currentList?.map((item: any) => (
+            <li key={item.id}>{item.titel}</li>
+          ))}
+        </ul>
+      </div>
+    );
+    return <div>{list}</div>;
+  }
+
   return (
-    <div className="App">
-      {organisation ? (<Fragment>
-      <h2> {organisation?.companyName}</h2>
-      <h3>Logo</h3>
-      <p><img src={organisation?.imageUrl} alt=""></img> </p>
-      <h3>Description</h3>
-      <p> {organisation?.customerDescription}</p>
-       </Fragment>) 
-      : (<Fragment><h2> Details</h2>
-      <p> Du måste vara inloggad för att se innehållet här </p> </Fragment>)
-      }
+    <div className="organisation_view">
+      {currentUserOrganization && organisation ? (
+        <Fragment>
+          <h2> {organisation?.companyName}</h2>
+          <p> {organisation?.updatedAt}</p>
+          <p className="organisation_logo">
+            <img src={organisation?.imageUrl} alt=""></img>{" "}
+          </p>
+          <div className="organisation_description">
+            <h3>Description</h3>
+            <p> {organisation?.customerDescription}</p>
+            <h3>
+              Projekt <span>({organisation?.projects?.length}) </span>
+            </h3>
+            <ListItems items={organisation?.projects} />
+            <h3>
+              {" "}
+              Beställningar <span>({organisation?.orders?.length})</span>
+            </h3>
+            <ListItems items={organisation?.orders} />
+            <h3> Kontrakt</h3>
+          </div>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <h2> Details</h2>
+          <p> Du måste vara inloggad för att se innehållet här </p>{" "}
+        </Fragment>
+      )}
     </div>
   );
 };

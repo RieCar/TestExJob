@@ -9,12 +9,14 @@ namespace Domain
         public Organisation()
         {
             Projects = new List<Project>();
+            Orders = new List<Order>(); 
         }
         public string CustomerId { get; set; }
 
         public string CompanyName { get; set; }
         public string ImageUrl { get; set; }
 
+        public string UpdatedAt { get; set; }
         public string CustomerDescription { get; set; }
 
         public List<Project> Projects { get; set; }

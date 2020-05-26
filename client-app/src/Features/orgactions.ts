@@ -10,7 +10,7 @@ export enum OrgActions{
     GET_CURRENT_FAILURE = 'GET_CURRENT_FAILURE',
 }
 
-export const getCurrent = (organisationId:any) => ({
+export const getCurrent = (organisationId:string) => ({
     type: 'GET_CURRENT',
     payload: {organisationId: organisationId}
 })
