@@ -7,14 +7,10 @@ namespace Persistence
 {
     public class OrderDTO
     {
-        public OrderDTO()
-        {
-            string[] Description = new string[100]; 
-        }
+       
         public SystemProperties Sys { get; set; }
         public string Title { get; set; }
-
-        public string Description { get; set; }
+        public Document Description { get; set; }
 
 
         //public DateTime OrderDate { get; set; }

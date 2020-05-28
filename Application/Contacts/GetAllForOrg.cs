@@ -38,7 +38,7 @@ namespace Application.Contacts
                        Console.WriteLine(contact.FirstName);
                     var cont = new Domain.Contact(); 
                     cont.Id = contact.Sys.Id;
-                    cont.FullName = contact.FirstName + contact.LastName;
+                    cont.FullName = contact.FirstName +" "+ contact.LastName;
                     cont.Email = contact.Email;
                     cont.Titel = contact.Titel;
                     cont.PhoneNumber = contact.PhoneNumber.ToString();

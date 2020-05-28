@@ -26,11 +26,15 @@ const OrganisationDetail: React.FC = () => {
 
   function ListItems(props: any) {
     var currentList = props.items;
+  currentList?.map((item:any)=> (
+     console.log(item.Description)
+   ))
     const list = (
       <div>
         <ul>
           {currentList?.map((item: any) => (
-            <li key={item.id}>{item.titel}</li>
+            <li key={item.id}>{item.titel}
+            </li>
           ))}
         </ul>
       </div>
