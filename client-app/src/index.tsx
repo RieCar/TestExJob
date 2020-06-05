@@ -1,22 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./app/layout/index.css";
+import "./app/layout/style/global.scss";
+
 import App from "./app/App";
 import * as serviceWorker from "./serviceWorker";
 
 import { Provider } from "react-redux";
 import { initializeStore } from "./Features/store";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
+import {createBrowserHistory} from 'history';
 
+export const history = createBrowserHistory(); 
 const store = initializeStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App /> 
-          
-       
+      <Router history={history}>
+        <App />       
       </Router>
     </Provider>
   </React.StrictMode>,

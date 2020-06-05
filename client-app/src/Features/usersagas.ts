@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { put, call, takeLatest } from "redux-saga/effects";
-
+import {history} from '../index';
 //UserActions
 import {
   UserActions,
@@ -22,10 +22,14 @@ function* handleOnLoginUser(action: AnyAction) {
       localStorage.setItem("token", user.token);
       localStorage.setItem("organisation", user.organisation);
       yield put(LoginUserSuccess(user));
+      history.push({pathname:'/Card'});
     }
-  } catch (error) {
-    console.log(error);
-    yield put(LoginUserFailure(error));
+  } catch (Error) {
+    console.log('sagaerror',Error.data);
+  
+    yield put(LoginUserFailure(Error.data));
+    history.push({pathname:'/notfound'});
+   
   }
 }
 

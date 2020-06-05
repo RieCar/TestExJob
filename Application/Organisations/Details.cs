@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Contentful.Core;
 using Contentful.Core.Models;
 using Contentful.Core.Search;
@@ -65,7 +67,9 @@ namespace Application.Organisations
                 //     }
                 // }
                 //Console.WriteLine("entryproject1" + "" + entry.ProjectsId.Count() + entry.ProjectsId[0].Sys.Id + "" + entry.ProjectsId[0].ProjectTitel);
-
+                if(entry == null){
+                     throw new RestExceptions(HttpStatusCode.NotFound, new {organisation = "Not found"});         
+                }
                 var currentCompany = new Organisation();
 
                 currentCompany.CustomerId = entry.Sys.Id;

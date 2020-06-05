@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Contentful.Core;
 using Contentful.Core.Search;
 using Domain;
@@ -30,6 +32,10 @@ namespace Application.Organisations
                  var qb = QueryBuilder<ProjectDTO>.New.ContentTypeIs("customerId").Include(2);
                 
                 var model = await _client.GetEntries(qb);
+
+                if(model == null){
+                     throw new RestExceptions(HttpStatusCode.NotFound, new {projects = "Not found"});         
+                }
                 var currentList = new List<Project>(); 
                 //mapping
                 foreach(var Project in model){

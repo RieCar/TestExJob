@@ -15,7 +15,7 @@ export default function userReducer(state = initialState, action: AnyAction) {
     case UserActions.LOGOUT_USER:
       return null;
     case UserActions.LOGOUT_USER_SUCCESS:
-      return null;
+      return initialState;
     default:
       return state;
   }

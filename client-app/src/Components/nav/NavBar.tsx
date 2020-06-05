@@ -1,9 +1,7 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { NavLink, useHistory } from "react-router-dom";
 import Login from "../Login";
-// import { IUser } from "../../app/models/user";
-// import agent from "../../app/api/agent";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Features/useractions";
 import { IStore } from "../../app/models/store";
@@ -63,7 +61,7 @@ export const NavBar: React.FC = () => {
                 </Fragment>
               ) : (
                 <Fragment>
-                  <NavLink to="/Login" component={Login}>
+                  <NavLink to="/Login" >
                     Log In
                   </NavLink>
                 </Fragment>
@@ -75,3 +73,6 @@ export const NavBar: React.FC = () => {
     </div>
   );
 };
+
+
+// component={Login}

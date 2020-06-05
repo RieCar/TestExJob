@@ -2,11 +2,15 @@ import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
 import { IOrganisation } from "../models/organisation";
 import { IUser, IFormValues } from "../models/user";
 import { IContact } from "../models/contact";
+import {history} from '../..';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(undefined, error =>{
-    console.log(error);
+    console.log(error.response);
+    if(error.response.status === 404){
+    throw error.response; 
+    }
 })
 
 axios.interceptors.request.use((config) => {

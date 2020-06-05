@@ -53,8 +53,7 @@ namespace Application.User
                     var newUser = await CheckCMS(request);
                     if (newUser == null) 
                     {
-                        throw new RestExceptions(HttpStatusCode.NotFound, new {user = "Not found"});
-                    
+                        throw new RestExceptions(HttpStatusCode.NotFound, new {error = "Not found"});         
                     }
                  
                      user = await CreateUser(newUser);
@@ -70,7 +69,7 @@ namespace Application.User
                         UserName = user.UserName
                     };
                 }
-                throw new RestExceptions(HttpStatusCode.Unauthorized);
+                throw new RestExceptions(HttpStatusCode.Unauthorized, new {user="wrong password"});
                 // return new User
                 // {
                 //     Error = "Inloggningen misslyckades, kontrollera uppgifter"
