@@ -7,7 +7,8 @@ import contactReducer from './contactreducer'
 const rootReducer = combineReducers({
     currentUser: userReducer,
     currentOrg: orgReducer,
-    currentContacts: contactReducer
+    currentContacts: contactReducer,
+   
 })
 
 export default rootReducer

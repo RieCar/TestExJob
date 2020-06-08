@@ -35,7 +35,7 @@ namespace Application.Organisations
                 foreach(var Organisation in model){
                     var org = new Organisation(); 
                     org.CompanyName = Organisation.CompanyName;
-                    org.CustomerDescription = Organisation.CustomerDescription;
+                    org.Description = Organisation.Description;
                     org.ImageUrl = await getImg(Organisation.CustomerIcon.SystemProperties.Id);
                     org.CustomerId = Organisation.Sys.Id; 
                     currentList.Add(org);

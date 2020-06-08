@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-
 import { NavLink, useHistory } from "react-router-dom";
-import Login from "../Login";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Features/useractions";
 import { IStore } from "../../app/models/store";
+import "../../app/layout/style/navbar.scss";
+//import Login from "../Login";
 
 export const NavBar: React.FC = () => {
   //const [isLoggedIn, setIsLoggedIn] = useState<Boolean | null>(false);
@@ -26,11 +26,11 @@ export const NavBar: React.FC = () => {
   };
 
   return (
-    <div className="navbar">
+    <div className="navbar-wrapper">
       <Fragment>
-        <nav>
-          <ul>
-            <li>
+        <nav className="navbar-main">
+          <ul className="navbar-list">
+            <li className="navbar-item">
               <NavLink
                 className="tags"
                 activeStyle={{ color: "red" }}
@@ -41,7 +41,7 @@ export const NavBar: React.FC = () => {
                 Home{" "}
               </NavLink>
             </li>
-            <li>
+            <li className="navbar-item">
               <NavLink
                 className="tags"
                 activeStyle={{ color: "red" }}
@@ -51,7 +51,7 @@ export const NavBar: React.FC = () => {
                 View Dashboard Protected
               </NavLink>
             </li>
-            <li>
+            <li className="navbar-item">
               {currentUser && currentUser.displayName ? (
                 <Fragment>
                   <p>
@@ -62,7 +62,7 @@ export const NavBar: React.FC = () => {
               ) : (
                 <Fragment>
                   <NavLink to="/Login" >
-                    Log In
+                    Login
                   </NavLink>
                 </Fragment>
               )}

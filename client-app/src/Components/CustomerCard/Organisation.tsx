@@ -3,10 +3,12 @@ import React, { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IStore } from "../../app/models/store";
 import { getCurrent } from "../../Features/orgactions";
-import Contact from "./Contact";
-import { getAllByOrg } from "../../Features/contactactions";
-import { IContact } from "../../app/models/contact";
-import { map } from "lodash/fp";
+
+import "../../app/layout/style/organisation.scss";
+// import Contact from "./Contact";
+// import { getAllByOrg } from "../../Features/contactactions";
+// import { IContact } from "../../app/models/contact";
+// import { map } from "lodash/fp";
 
 const OrganisationDetail: React.FC = () => {
   const currentUserOrganization = useSelector(
@@ -46,14 +48,15 @@ const OrganisationDetail: React.FC = () => {
     <div className="organisation_view">
       {currentUserOrganization && organisation ? (
         <Fragment>
-          <h2> {organisation?.companyName}</h2>
-          <p> {organisation?.updatedAt}</p>
-          <p className="organisation_logo">
+           <p className="organisation_logo">
             <img src={organisation?.imageUrl} alt=""></img>{" "}
           </p>
-          <div className="organisation_description">
+          <h2> {organisation?.companyName}</h2>
+          <p> Senast uppdaterad: {organisation?.updatedAt}</p>
+
+          <div className="organisation_description">           
             <h3>Description</h3>
-            <p> {organisation?.customerDescription}</p>
+            <p> {organisation?.description}</p>
             <h3>
               Projekt <span>({organisation?.projects?.length}) </span>
             </h3>

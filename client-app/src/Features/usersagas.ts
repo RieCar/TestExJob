@@ -28,10 +28,12 @@ function* handleOnLoginUser(action: AnyAction) {
     console.log('sagaerror',Error.data);
   
     yield put(LoginUserFailure(Error.data));
-    history.push({pathname:'/notfound'});
+    // history.push({pathname:'/Login'});
    
   }
 }
+
+
 
 function* handleOnLogOutUser(action: AnyAction) {
   console.log('logout user');
@@ -40,12 +42,7 @@ function* handleOnLogOutUser(action: AnyAction) {
   yield put(LogoutUserSuccess());
 }
 
- 
-// function* mySaga(){
-//   yield takeLatest(UserActions.LOGIN_USER, handleOnLoginUser)
-// }
-// export default mySaga;
 export const userSagas = [  
    takeLatest(UserActions.LOGIN_USER, handleOnLoginUser),
-   takeLatest(UserActions.LOGOUT_USER, handleOnLogOutUser),
+   takeLatest(UserActions.LOGOUT_USER, handleOnLogOutUser)
 ]

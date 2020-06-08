@@ -76,7 +76,9 @@ namespace Application.Organisations
                 currentCompany.CompanyName = entry.CompanyName;
                 currentCompany.ImageUrl = await getImg(entry.CustomerIcon.SystemProperties.Id);
                 currentCompany.UpdatedAt = entry.Sys.UpdatedAt.ToString();
-                currentCompany.CustomerDescription = entry.CustomerDescription;
+              //currentCompany.CustomerDescription = entry.CustomerDescription;
+                Console.WriteLine("description:" + entry.Description.ToString() + "not do string"+ entry.Description); 
+                currentCompany.Description = entry.Description.ToString();
                 foreach (var proj in entry.ProjectsId)
                 {
                     var project = new Project()

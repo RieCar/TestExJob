@@ -11,6 +11,9 @@ axios.interceptors.response.use(undefined, error =>{
     if(error.response.status === 404){
     throw error.response; 
     }
+    else if(error.response.status === 401){
+        throw error.response; 
+    }
 })
 
 axios.interceptors.request.use((config) => {

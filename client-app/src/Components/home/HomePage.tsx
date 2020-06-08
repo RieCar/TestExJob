@@ -1,8 +1,10 @@
 import React from 'react'
-import '../../app/layout/index.css';
+import '../../app/layout/style/global.scss';
+import '../../app/layout/style/home.scss';
 
 export default function HomePage() {
     return (
+        <div className="container">
         <div className="home">
               <h2> Welcome to Camelontas customer portal</h2>
               
@@ -10,6 +12,7 @@ export default function HomePage() {
 
               <p> Log in to continue</p>
          
+        </div>
         </div>
     )
 }

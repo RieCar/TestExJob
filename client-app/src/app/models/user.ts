@@ -5,7 +5,7 @@ export interface IUser{
     token: string,
     organisation: string,
     isLoggedIn?: boolean,
-
+    Errors? : {}
 
 }
 

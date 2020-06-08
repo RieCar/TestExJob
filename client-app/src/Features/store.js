@@ -6,7 +6,9 @@ import rootSaga from './rootSagas'
 import rootReducer from './rootReducer'
 
 // Initial store
-const initialStore = {}
+const initialStore = {
+   
+}
 
 export const initializeStore = (initialState = initialStore) => {
 

@@ -69,7 +69,7 @@ namespace Application.User
                         UserName = user.UserName
                     };
                 }
-                throw new RestExceptions(HttpStatusCode.Unauthorized, new {user="wrong password"});
+                throw new RestExceptions(HttpStatusCode.Unauthorized, new {user="wrong credentials, try again"});
                 // return new User
                 // {
                 //     Error = "Inloggningen misslyckades, kontrollera uppgifter"
