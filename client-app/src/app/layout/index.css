@@ -8,14 +8,9 @@ header{
 
 
 
-.footer{
-  position: absolute;
-  bottom: 10px; 
-  width: 100%; 
-  text-align: center;
-}
 
-.aside{
+
+/* .aside{
   float: left;
   width: 20%;  
 }
@@ -33,10 +28,10 @@ header{
   clear:both;
 } */
 
-.main_orgside{
+/* .main_orgside{
   position:relative;
   width: 54%;
   float:left;
   border: 1px solid black;
-} 
+}   */
 

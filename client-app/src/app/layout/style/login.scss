@@ -1,6 +1,17 @@
+@import '../style/breakpoints.scss';
+@import '../style/variables.scss';
+
+// .mainlogin{
+//     @extend %container;
+// }
+
 .ingress{
     margin: 0 auto; 
     width: 50%; 
+    
+    @media screen and (max-width: $breakpoint-small) {
+        width: 80%;
+    }
 }
 
 .ingress_title{
@@ -17,6 +28,11 @@
     background-color: #f7bec8; 
     padding: 30px; 
     margin-top: 60px; 
+
+    @media screen and (max-width: $breakpoint-small) {
+        width: 85%;
+        padding: 10px;
+    }
   }
   
   .login_form_group{
@@ -32,6 +48,10 @@
       width: 70%; 
       margin-top:10px; 
       font-size: 1rem; 
+
+      @media screen and (max-width: $breakpoint-small) {
+        width: 95%;
+    }
   }
 
   .login_form_button{
@@ -39,4 +59,9 @@
       padding: 15px; 
       font-size: 1rem; 
 
+      @media screen and (max-width: $breakpoint-small) {
+        width: 50%;
+        padding: 10px;
+    }
   }
+

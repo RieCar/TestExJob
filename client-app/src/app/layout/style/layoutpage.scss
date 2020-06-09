@@ -1,5 +1,29 @@
+@import '../style/breakpoints.scss';
+@import '../style/variables.scss';
 
 
 .top-bar{
     background-color:  #C5DCDB; 
+    @extend %container;
+   padding-top: 20px;
+   padding-bottom: 20px; 
+
 }
+
+.footer{
+    // position: absolute;
+    // bottom: 10px; 
+    height:50px; 
+    margin-top: -50px; 
+    max-width: 100%; 
+    text-align: center;
+    @extend %container;
+  }
+
+  .main{
+    @extend %container;
+    min-height: 100%; 
+    padding-bottom: 100px; 
+    padding-top: 20px; 
+    // height: 100vh;
+   }

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios'; 
-import { IFormValues } from '../app/models/user';
+import { IFormValues } from '../../app/models/user';
 
 export default class Register extends React.Component<{}, {firstname:string, lastname:string,email:string, password:string, organisation:string}>{
 

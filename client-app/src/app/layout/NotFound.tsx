@@ -9,7 +9,7 @@ const NotFound = ()=> {
             <h2> Not found</h2>
             <p> Ooops we have looked everywhere but we still haven't found what you looking for..</p>
             
-
+            <p> If the problem remains please contact <a href="mailto: info@camelonta.se"> Camelonta  </a></p>
             <NavLink to={'/Register'}> Ny användare? Registrera dig! </NavLink>
         </div>
     )

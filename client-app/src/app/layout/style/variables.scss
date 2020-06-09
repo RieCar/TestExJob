@@ -1,0 +1,29 @@
+@import './breakpoints.scss';
+
+$container-width: 1465px;
+// $container-width-small: 300px; //1256px;
+$container-padding-sm: 15px;
+$container-padding-md: 25px;
+$container-padding-lg: 50px;
+
+%container {
+    max-width: 100%;
+    width: $container-width;
+    margin: 0 auto;
+    padding: 0 $container-padding-lg;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 100%; 
+        padding: 0 $container-padding-lg;
+    }
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%; 
+        padding: 0 $container-padding-md;
+    }
+
+    @media only screen and (max-width: $breakpoint-small) {
+      width:100%; 
+        padding: 0 $container-padding-sm;
+    }
+}

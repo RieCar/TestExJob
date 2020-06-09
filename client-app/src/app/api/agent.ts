@@ -2,17 +2,25 @@ import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
 import { IOrganisation } from "../models/organisation";
 import { IUser, IFormValues } from "../models/user";
 import { IContact } from "../models/contact";
-import {history} from '../..';
+// import {history} from '../..';
+import { history } from '../..';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(undefined, error =>{
-    console.log(error.response);
-    if(error.response.status === 404){
-    throw error.response; 
+    console.log("error" ,error.response);
+    const { status, data, config, headers } = error.response;
+
+    if(status === 404){
+    //history.push('/notfound');
+    console.log("data", data);
+     throw error.response; 
     }
-    else if(error.response.status === 401){
+    else if(status === 401){
         throw error.response; 
+    }
+    else if(status === 500){
+        history.push({pathname:'/NotFound'});
     }
 })
 

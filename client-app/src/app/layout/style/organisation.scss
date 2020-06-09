@@ -1,7 +1,18 @@
+@import '../style/breakpoints.scss';
+@import '../style/variables.scss';
+
 .organisation_logo{
-    // position: relative;
-    // top: 0; 
-    // left: 0;
+    width:30%;
+    height: auto;
+    object-fit: cover;
+
+    @media screen and (max-width: $breakpoint-medium) {
+        width: 40%; 
+    }
+    @media screen and (max-width: $breakpoint-small) {
+        width: 50%; 
+    }
+
   }
   
   .organisation_description{

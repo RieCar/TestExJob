@@ -9,8 +9,7 @@ import "../../app/layout/style/navbar.scss";
 export const NavBar: React.FC = () => {
   //const [isLoggedIn, setIsLoggedIn] = useState<Boolean | null>(false);
   // const [user, setUser ] = useState<IUser | null>(null);
-  const currentUser = useSelector(
-    (store: IStore) => store.currentUser);
+  const currentUser = useSelector((store: IStore) => store.currentUser);
 
   console.log(currentUser?.displayName);
 
@@ -26,7 +25,7 @@ export const NavBar: React.FC = () => {
   };
 
   return (
-    <div className="navbar-wrapper">
+    <div className="container">
       <Fragment>
         <nav className="navbar-main">
           <ul className="navbar-list">
@@ -48,20 +47,26 @@ export const NavBar: React.FC = () => {
                 exact
                 to="/Card"
               >
-                View Dashboard Protected
+                Customer page
               </NavLink>
             </li>
             <li className="navbar-item">
               {currentUser && currentUser.displayName ? (
                 <Fragment>
                   <p>
-                    <i className="far fa-user"></i> Welcome {currentUser.displayName}{" "}
+                    <i className="far fa-user"></i> Welcome{" "}
+                    {currentUser.displayName}{" "}
                   </p>
                   <button onClick={handleOnClick}>Log Out </button>{" "}
                 </Fragment>
               ) : (
                 <Fragment>
-                  <NavLink to="/Login" >
+                  <NavLink
+                    className="tags"
+                    activeStyle={{ color: "red" }}
+                    exact
+                    to="/Login"
+                  >
                     Login
                   </NavLink>
                 </Fragment>
@@ -73,6 +78,5 @@ export const NavBar: React.FC = () => {
     </div>
   );
 };
-
 
 // component={Login}

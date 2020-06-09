@@ -26,9 +26,10 @@ function* handleOnLoginUser(action: AnyAction) {
     }
   } catch (Error) {
     console.log('sagaerror',Error.data);
+    var errormsg = Error.data.Errors.user; 
   
-    yield put(LoginUserFailure(Error.data));
-    // history.push({pathname:'/Login'});
+    yield put(LoginUserFailure(errormsg));
+    history.push({pathname:'/Login'});
    
   }
 }

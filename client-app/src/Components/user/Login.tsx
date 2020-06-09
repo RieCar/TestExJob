@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { loginUser, LoginUserFailure } from "../Features/useractions";
+import { loginUser } from "../../Features/useractions";
 import { useDispatch, useSelector} from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { IStore } from "../app/models/store";
+import { IStore } from "../../app/models/store";
 
-import "../app/layout/style/login.scss";
+import "../../app/layout/style/login.scss";
+import ReactDOM from "react-dom";
 
 
 const Login: React.FC = () => {
@@ -13,14 +14,18 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const currentUser = useSelector(
-    (store: IStore) => store.currentUser
+  var error = useSelector(
+    (store: IStore) => store.currentUser?.error
   );
-  
+
+  var message = useSelector(
+    (store: IStore) => store.currentUser?.message
+  );
 
   const dispatch = useDispatch(); 
   let history = useHistory();
-  let location = useLocation();
+
+
  
   var organisation = window.localStorage.getItem('organisation');
  
@@ -35,22 +40,14 @@ const Login: React.FC = () => {
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(form);
-    // var user : IFormValues= {
-    //   email: form.email,
-    //   password: form.password
-    // };
+  
     if (form.email && form.password) {
       dispatch(loginUser(form));
       history.push({pathname:"/Card", state: organisation});
     }
     else{ //if either email or password is empty no request goes off
-     var error = {Message:""}
-     error.Message = "You need to fill in both fields.";
-     //error = "You need to fill in both fields.";
-     console.log("Error", error); 
-      dispatch(LoginUserFailure(error.Message));
-      // history.push({pathname:"/Login",})
-    //  var error = currentUser;
+      var HTMLp = React.createElement('p', {className:'error'}, "You need to fill in both fields.");
+      ReactDOM.render(HTMLp, document.getElementById('errormessage'));
     }
   };
 
@@ -58,13 +55,13 @@ const Login: React.FC = () => {
     var currentList = props.items;
     console.log("current", currentList);
   currentList?.map((item:any)=> (
-     console.log(item.Description)
+     console.log("erroritem",item.error.Errors)
    ))
     const list = (
       <div>
         <ul>
           {currentList?.map((item: any) => (
-            <li key={item}>{item}
+            <li key={item}>{item.error}
             </li>
           ))}
         </ul>
@@ -75,20 +72,27 @@ const Login: React.FC = () => {
 
 
   return (
-    <div className="container"> 
+    <div className="mainlogin"> 
     <div className="ingress"> 
     <h2 className="ingress_title"> Login at Customer Portal </h2>
+    <p> You need to login to use the customer Portal</p>
     <p> At your organisations portal site you can read about ongoing projects, laid orders and so on</p>
-    <p> If you don't have the credentials contact Camelonta at info@camelonta.se</p>
+    <p> If you don't have the credentials contact Camelonta at <a href="mailto=info@camelonta.se">info@camelonta.se </a></p>
     </div>
     <div>
-    {currentUser?.Errors ? (
-    <ListErrors items={currentUser?.Errors} />
-      ) : <p> </p>
-    }
+    {error ? (
+     // <p> {message}</p>
+     <ListErrors props={message}/>
+  ):
+  (
+    <p> </p>
+  )}
     </div>
-    <form className="login_form" onSubmit={handleOnSubmit}>
+
   
+    <form className="login_form" onSubmit={handleOnSubmit}>
+    <div id="errormessage" style={{color: "red"}}></div>
+
     <div className="login_form_group">
       <label htmlFor="email" className="login_form_label">
         Email      

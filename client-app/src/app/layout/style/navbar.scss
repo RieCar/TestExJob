@@ -1,5 +1,8 @@
+@import '../style/breakpoints.scss';
+@import '../style/variables.scss';
+
 .navbar-wrapper{
-  
+   @extend %container;
     width:100%; 
     padding:10px 0; 
   }

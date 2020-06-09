@@ -1,0 +1,14 @@
+@import '../style/breakpoints.scss';
+@import '../style/variables.scss';
+
+.sidebarmenu ul{
+
+    @media screen and (max-width: $breakpoint-small) {
+        display: inline-block; 
+    }
+
+}
+
+.sidebaritem{
+    padding:50px 0; 
+}

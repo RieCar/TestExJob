@@ -9,10 +9,10 @@ import Card from "../Components/CustomerCard/Card";
 import { PageLayout } from "./layout/LayoutPage";
 import NotFound from "./layout/NotFound";
 import { history } from "../index";
-import Register from "../Components/Register";
+import Register from "../Components/user/Register";
 import { useSelector } from "react-redux";
 import { IStore } from "./models/store";
-import Login from "../Components/Login";
+import Login from "../Components/user/Login";
 
 function App() {
   const currentUser = useSelector(

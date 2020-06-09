@@ -1,0 +1,65 @@
+@import "../style/breakpoints.scss";
+@import "../style/variables.scss";
+
+.maincard {
+  height: 100vh;
+  margin: 0 -50px 0 -50px;
+
+  @media screen and (max-width: $breakpoint-medium) {
+    margin: 0 -20px 0 -20px;
+  }
+
+  @media screen and (max-width: $breakpoint-small) {
+    margin: 0 -10px 0 -10px;
+  }
+}
+
+.maincard div {
+  float: left;
+
+  @media screen and (max-width: $breakpoint-small) {
+    clear:both;
+    display: block; 
+  }
+}
+
+.aside {
+  width: 20%;
+  @media screen and (max-width: $breakpoint-small) {
+    width: 30%;
+  }
+}
+
+.rightaside {
+  width: 20%;
+
+  padding: 0 10px 0 40px;
+
+  @media screen and (max-width: $breakpoint-medium) {
+    padding: 0;
+    padding-left:2px; 
+    padding-top: 40px;
+    padding-bottom: 40px; 
+  }
+  @media screen and (max-width: $breakpoint-small) {
+    width: 100%;
+    padding-left:0; 
+  }
+}
+
+.contact_item {
+  padding: 5px 0;
+}
+/* .clearfix{
+  clear:both;
+} */
+
+.main_orgside {
+  position: relative;
+  width: 60%;
+  border: 1px solid black;
+
+  @media screen and (max-width: $breakpoint-small) {
+    width: 100%;
+  }
+}
