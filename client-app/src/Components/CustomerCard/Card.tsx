@@ -4,7 +4,7 @@ import SideBar from "./SideBar";
 import Contact from "./Contact";
 import { useSelector, useDispatch } from "react-redux";
 import { IStore } from "../../app/models/store";
-import { getCurrent } from "../../Features/orgactions";
+import { getCurrent } from "../../Features/reduxorganisation/orgactions";
 
 import '../../app/layout/style/card.scss';
 

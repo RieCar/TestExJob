@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../Features/useractions";
+import { logoutUser } from "../../Features/reduxuser/useractions";
 import { IStore } from "../../app/models/store";
 import "../../app/layout/style/navbar.scss";
 //import Login from "../Login";

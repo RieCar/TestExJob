@@ -1,4 +1,5 @@
-import {IUser} from "../app/models/user";
+import {IUser} from "../../app/models/user";
+import { AxiosResponse } from "axios";
 // import { actionChannel } from "redux-saga/effects";
 
 export enum UserActions{
@@ -19,7 +20,7 @@ export const LoginUserSuccess = (user: IUser) => ({
     payload: { user }
 })
 
-export const LoginUserFailure = (error: string) => ({
+export const LoginUserFailure = (error: AxiosResponse) => ({
     type: UserActions.LOGIN_USER_FAILURE,
     payload: { error },
     error: true

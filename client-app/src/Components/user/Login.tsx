@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { loginUser } from "../../Features/useractions";
+import { loginUser, LoginUserFailure } from "../../Features/reduxuser/useractions";
 import { useDispatch, useSelector} from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { IStore } from "../../app/models/store";
 
 import "../../app/layout/style/login.scss";
 import ReactDOM from "react-dom";
+import ErrorMessenger from "../../app/layout/ErrorMessenger";
 
 
 const Login: React.FC = () => {
@@ -21,7 +22,7 @@ const Login: React.FC = () => {
   var message = useSelector(
     (store: IStore) => store.currentUser?.message
   );
-
+ console.log("message", message);
   const dispatch = useDispatch(); 
   let history = useHistory();
 
@@ -46,30 +47,11 @@ const Login: React.FC = () => {
       history.push({pathname:"/Card", state: organisation});
     }
     else{ //if either email or password is empty no request goes off
+      //dispatch(LoginUserFailure("You need to fill in both fields.")); 
       var HTMLp = React.createElement('p', {className:'error'}, "You need to fill in both fields.");
       ReactDOM.render(HTMLp, document.getElementById('errormessage'));
     }
   };
-
-  function ListErrors(props: any) {
-    var currentList = props.items;
-    console.log("current", currentList);
-  currentList?.map((item:any)=> (
-     console.log("erroritem",item.error.Errors)
-   ))
-    const list = (
-      <div>
-        <ul>
-          {currentList?.map((item: any) => (
-            <li key={item}>{item.error}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-    return <div>{list}</div>;
-  }
-
 
   return (
     <div className="mainlogin"> 
@@ -81,8 +63,7 @@ const Login: React.FC = () => {
     </div>
     <div>
     {error ? (
-     // <p> {message}</p>
-     <ListErrors props={message}/>
+     <ErrorMessenger error={message} /> 
   ):
   (
     <p> </p>

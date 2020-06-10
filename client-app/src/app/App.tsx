@@ -47,7 +47,7 @@ const PrivateRoute = ({ component:Component, isToken, ...rest }:any) => (
     
       isToken !== undefined
       ? <Component {...props} />
-      : <Redirect to='/NotFound' />
+      : <Redirect to='/Login' />
   )} />
   
 )

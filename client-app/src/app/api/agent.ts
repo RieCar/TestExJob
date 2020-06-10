@@ -4,6 +4,7 @@ import { IUser, IFormValues } from "../models/user";
 import { IContact } from "../models/contact";
 // import {history} from '../..';
 import { history } from '../..';
+import { IProject } from "../models/project";
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -15,6 +16,7 @@ axios.interceptors.response.use(undefined, error =>{
     //history.push('/notfound');
     console.log("data", data);
      throw error.response; 
+     //history.push({pathname:'/NotFound'});
     }
     else if(status === 401){
         throw error.response; 
@@ -59,8 +61,13 @@ const Contacts ={
     getAllByOrg: (id:string):Promise<IContact> => requests.get(`/contact/${id}` )
 }
 
+const Projects ={
+    ProjectDetails: (id:string):Promise<IProject> => requests.get(`/project/${id}` )
+}
+
 export default {
     Organisations,
     Users,
-    Contacts
+    Contacts,
+    Projects
 }

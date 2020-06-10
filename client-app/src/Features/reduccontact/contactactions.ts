@@ -1,4 +1,4 @@
-import { IContact } from "../app/models/contact"
+import { IContact } from "../../app/models/contact"
 
 export enum ContactActions{
     Get_ALL_BY_ORG = 'GET_ALL_BY_ORG',

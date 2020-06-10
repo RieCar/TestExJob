@@ -1,15 +1,33 @@
 import React, { Component } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { IStore } from '../../app/models/store';
+// import axios from 'axios';
 
 import '../../app/layout/style/sidebar.scss';
+// import agent from '../../app/api/agent';
+import { getProjectDetails } from '../../Features/reduxproject/projactions';
 
 const SideBar = () => {
 
     const currentProjects = useSelector((store: IStore) => store.currentOrg?.projects);
 
     const currentOrders = useSelector((store: IStore) => store.currentOrg?.orders);
-      
+    const dispatch = useDispatch(); 
+
+    const HandleOnClick = (event: any) => {
+      console.log(event.target.dataset.id); 
+      var searchId = event.target.dataset.id; 
+      console.log("searchId", searchId);
+      if(searchId){
+        dispatch(getProjectDetails(searchId));
+      }
+     
+    //  if(searchId !== ""){
+    //    var respons = agent.Projects.ProjectDetails(searchId);
+    //    console.log("respons",respons);
+    //  }
+     
+    };
       function ListItems(props: any) {
         var currentList = props.items;
       currentList?.map((item:any)=> (
@@ -19,7 +37,7 @@ const SideBar = () => {
           <div>
             <ul>
               {currentList?.map((item: any) => (
-                <li key={item.id}><a href="#"> {item.titel}</a>
+                <li key={item.id}><button className="navbutton" type="button" data-id={item.id} onClick={HandleOnClick}> {item.titel}</button>
                 </li>
               ))}
             </ul>

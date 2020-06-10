@@ -1,4 +1,4 @@
-import {IOrganisation} from "../app/models/organisation";
+import {IOrganisation} from "../../app/models/organisation";
 
 
 export enum OrgActions{

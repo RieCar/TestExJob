@@ -1,9 +1,9 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { OrgActions, getCurrentSuccess, getCurrentFailure } from "./orgactions";
-import agent from "../app/api/agent";
+import agent from "../../app/api/agent";
 import { AnyAction } from "redux";
 import { useState } from "react";
-import { IOrganisation } from "../app/models/organisation";
+import { IOrganisation } from "../../app/models/organisation";
 
 
 function* handleOnGetCurrent(action: AnyAction) {

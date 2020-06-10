@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+
 export interface IUser{
 
     userName: string, 
@@ -6,7 +8,7 @@ export interface IUser{
     organisation: string,
     isLoggedIn?: boolean,
     error?: {},
-    message?: {}
+    message: AxiosResponse 
 
 }
 

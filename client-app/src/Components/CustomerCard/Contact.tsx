@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { IStore } from "../../app/models/store";
-import { getAllByOrg } from "../../Features/contactactions";
+import { getAllByOrg } from "../../Features/reduccontact/contactactions";
 import { IContact, IContacts } from "../../app/models/contact";
 
 const Contact: React.FC = () => {

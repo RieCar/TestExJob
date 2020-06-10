@@ -53,7 +53,7 @@ namespace Application.User
                     var newUser = await CheckCMS(request);
                     if (newUser == null) 
                     {
-                        throw new RestExceptions(HttpStatusCode.NotFound, new {error = "Not found"});         
+                        throw new RestExceptions(HttpStatusCode.NotFound, new {error = "Do you have an account? Check your credentials or contact Camelonta "});         
                     }
                  
                      user = await CreateUser(newUser);

@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { put, call, takeLatest } from "redux-saga/effects";
-import {history} from '../index';
+import {history} from '../../index';
 //UserActions
 import {
   UserActions,
@@ -8,7 +8,7 @@ import {
   LoginUserFailure,
   LogoutUserSuccess,
 } from "./useractions";
-import agent from "../app/api/agent";
+import agent from "../../app/api/agent";
 
 function* handleOnLoginUser(action: AnyAction) {
   const loginInformation = action.payload.loginformation;
@@ -25,9 +25,9 @@ function* handleOnLoginUser(action: AnyAction) {
       history.push({pathname:'/Card'});
     }
   } catch (Error) {
-    console.log('sagaerror',Error.data);
-    var errormsg = Error.data.Errors.user; 
-  
+    console.log('sagaerror',Error);
+    var errormsg = Error; 
+    //.data.Errors.user;
     yield put(LoginUserFailure(errormsg));
     history.push({pathname:'/Login'});
    

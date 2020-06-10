@@ -1,15 +1,17 @@
  import { all } from 'redux-saga/effects'
 
 // Sagas
-import {userSagas} from './usersagas';
-import { orgSagas } from './orgsagas';
-import { contactSagas } from './contactsagas';
+import {userSagas} from './reduxuser/usersagas';
+import { orgSagas } from './reduxorganisation/orgsagas';
+import { contactSagas } from './reduccontact/contactsagas';
+import { projectSagas } from './reduxproject/projsagas';
 
 
 export default function* rootSaga() {
     yield all([
         ...userSagas,
         ...orgSagas,
-        ...contactSagas
+        ...contactSagas,
+        ...projectSagas
     ])
 } 
