@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   var message = useSelector(
     (store: IStore) => store.currentUser?.message
   );
- console.log("message", message);
+
   const dispatch = useDispatch(); 
   let history = useHistory();
 

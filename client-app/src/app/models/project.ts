@@ -1,12 +1,16 @@
+import { IContact } from "./contact";
+import { IEmployee } from "./employee";
+
 export interface IProject{
 
     id:string;
     titel:string; 
-    customerDescription?:string; 
+    description?:string; 
     startDate?: string;
     endDate?: string;
     currentStatus?: string; 
-    days?: number;
-    orgcontact?: {};
+    totalProjectDays?: number;
+    contact?: IContact;
+    projectLeader?: IEmployee
     
 }

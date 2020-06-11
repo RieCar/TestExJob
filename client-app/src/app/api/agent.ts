@@ -5,6 +5,7 @@ import { IContact } from "../models/contact";
 // import {history} from '../..';
 import { history } from '../..';
 import { IProject } from "../models/project";
+import { IOrder } from "../models/order";
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -22,7 +23,8 @@ axios.interceptors.response.use(undefined, error =>{
         throw error.response; 
     }
     else if(status === 500){
-        history.push({pathname:'/NotFound'});
+        throw error.response; 
+        //history.push({pathname:'/NotFound'});
     }
 })
 
@@ -65,9 +67,14 @@ const Projects ={
     ProjectDetails: (id:string):Promise<IProject> => requests.get(`/project/${id}` )
 }
 
+const Orders ={
+    OrderDetails: (id:string):Promise<IOrder> => requests.get(`/order/${id}` )
+}
+
 export default {
     Organisations,
     Users,
     Contacts,
-    Projects
+    Projects,
+    Orders
 }

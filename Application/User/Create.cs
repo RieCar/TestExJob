@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
@@ -9,6 +10,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Application.Errors;
 
 namespace Application.User
 {
@@ -44,12 +46,14 @@ namespace Application.User
             {
                 if (await _context.Users.Where(u => u.Email == request.Email).AnyAsync())
                 {
-                    throw new Exception("the email already exists");
+                    throw new RestExceptions(HttpStatusCode.BadRequest, new {Email = "Email already exists"});
+                    
                 }
 
                 if (await _context.Users.Where(u => u.UserName == request.UserName).AnyAsync())
                 {
-                    throw new Exception("the username already exists");
+                     throw new RestExceptions(HttpStatusCode.BadRequest, new {Username = "the username already exists"});
+                    
                 }
 
                 var user = new ApplicationUser()
@@ -59,7 +63,7 @@ namespace Application.User
                     Email = request.Email,
                     OrganisationID = request.Organisation
                 };
-Console.WriteLine(user.DisplayName +  request.Password);
+
                 var result = await _userManager.CreateAsync(user, request.Password);
 
                 if (result.Succeeded)

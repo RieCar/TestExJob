@@ -1,5 +1,6 @@
 import {IUser} from "../../app/models/user";
 import { AxiosResponse } from "axios";
+import { actionChannel } from "redux-saga/effects";
 // import { actionChannel } from "redux-saga/effects";
 
 export enum UserActions{
@@ -28,12 +29,12 @@ export const LoginUserFailure = (error: AxiosResponse) => ({
 
 export const logoutUser = () => ({
     type: 'LOGOUT_USER',
-    payload: {user: {}, contact: {}}
+    payload: undefined
 })
 
 export const LogoutUserSuccess = () => ({
     type: UserActions.LOGOUT_USER_SUCCESS,
-    payload: {information: "utloggad"}
+    payload: {logoutinformation: "Logged out"}
 })
 
 

@@ -29,9 +29,9 @@ namespace Application.Projects
              CancellationToken cancellationToken)
             {
                 var queryBuilder = QueryBuilder<ProjectDTO>.New
-                .ContentTypeIs("project").FieldEquals(f => f.Sys.Id, request.Id).Include(2);
+                .ContentTypeIs("project").FieldEquals(f => f.Sys.Id, request.Id).Include(3);
                 var entry = (await _client.GetEntries(queryBuilder)).FirstOrDefault();
-Console.WriteLine("titel" + entry.OrganisationContactReference.Titel);
+//Console.WriteLine("titel" + entry.OrganisationContactReference.Titel);
                 var currentProject = new Project();
                 currentProject.Id = entry.Sys.Id;
                 currentProject.Titel = entry.ProjectTitel;
@@ -46,9 +46,15 @@ Console.WriteLine("titel" + entry.OrganisationContactReference.Titel);
                     Titel = entry.OrganisationContactReference.Titel,
                     Id = entry.OrganisationContactReference.Sys.Id,
                 };
-              
                 currentProject.Contact = contact; 
+                var employee = new Employee (){
+                    Fullname = entry.ProjectLeader.FullName,
+                    Titel = entry.ProjectLeader.Titel,
+                    Email = entry.ProjectLeader.Email,
+                    Phonenumber = entry.ProjectLeader.Phone
 
+                };
+                currentProject.ProjectLeader = employee; 
                 currentProject.TotalProjectDays = getDifferens(entry.StartDate, entry.EndDate); 
                 return currentProject;
             }

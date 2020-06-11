@@ -13,15 +13,24 @@
     margin: 0 -10px 0 -10px;
   }
 }
-
-.maincard div {
-  float: left;
-
+.maincard .rightaside,
+.maincard .main_orgside,
+.maincard .aside
+{
+  float:left; 
   @media screen and (max-width: $breakpoint-small) {
     clear:both;
     display: block; 
   }
 }
+// .maincard div {
+//   float: left;
+
+//   @media screen and (max-width: $breakpoint-small) {
+//     clear:both;
+//     display: block; 
+//   }
+// }
 
 .aside {
   width: 20%;
@@ -57,9 +66,14 @@
 .main_orgside {
   position: relative;
   width: 60%;
-  border: 1px solid black;
+  // border: 1px solid black;
 
   @media screen and (max-width: $breakpoint-small) {
     width: 100%;
   }
+}
+
+.clearfix{
+  clear:both; 
+  display: block; 
 }

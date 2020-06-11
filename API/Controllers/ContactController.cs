@@ -13,7 +13,6 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Contact>>> GetAllForOrg(string id){
             var result = await Mediator.Send(new GetAllForOrg.Query{Organisation = id});
-            Console.WriteLine("contacts id"+  id);
             return result; 
         }
     }

@@ -13,6 +13,7 @@ import Register from "../Components/user/Register";
 import { useSelector } from "react-redux";
 import { IStore } from "./models/store";
 import Login from "../Components/user/Login";
+import ProjectDetail from "../Components/detailedView/Project";
 
 function App() {
   const currentUser = useSelector(
@@ -25,11 +26,13 @@ function App() {
               <Fragment>
                 <Switch> 
                 <Route exact path="/" component={HomePage} />
-                  <Route exact path="/Login" component={Login}/>               
+                  <Route exact path="/Login" component={Login}/> 
+                            
                   <PrivateRoute exact path="/Card" isToken={currentUser?.token} component={Card} />
                  
                   <Route component={NotFound} />
-                  <Route component={Register} />
+                 
+                 
                  
                 </Switch>
               </Fragment>

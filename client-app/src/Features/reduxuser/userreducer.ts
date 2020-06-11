@@ -27,9 +27,19 @@ export default function userReducer(state = initialState, action: AnyAction) {
       };
     return Object.assign({}, state, newState); //action.payload.error; 
     case UserActions.LOGOUT_USER:
-      return null;
+      newState = {
+        data: undefined,
+        error: null,
+        message: null
+      };
+      return Object.assign({}, state, newState); //null;
     case UserActions.LOGOUT_USER_SUCCESS:
-      return initialState;
+      newState = {
+        data: action.payload.logoutinformation,
+        error: null,
+        message: null
+      };
+      return Object.assign({}, state, newState);// initialState;
     default:
       return state;
   }

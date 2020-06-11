@@ -2,7 +2,7 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import agent from "../../app/api/agent";
 import { AnyAction } from "redux";
 import { ProjectActions, getProjectDetailsSuccess, getProjectDetailsFailure } from "./projactions";
-
+import {history} from '../../index';
 
 
 function* handleOnGetDetails(action: AnyAction) {
@@ -14,9 +14,11 @@ function* handleOnGetDetails(action: AnyAction) {
       agent.Projects.ProjectDetails,
       projectid
     );
-console.log("contacts",  project);
+console.log("project",  project);
     if (project) {
       yield put(getProjectDetailsSuccess(project));
+      // history.push({pathname:'/ProjectDetail'});
+      
     }
   } catch (error) {
       yield put(getProjectDetailsFailure(error.message))

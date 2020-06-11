@@ -15,7 +15,13 @@ const OrganisationDetail: React.FC = () => {
   );
   const organisation = useSelector((store: IStore) => store.currentOrg);
 
-  function createMarkup () {
+  function htmlDecode(input:any) {
+    // var text = ""; 
+    //   text = organisation?.description ? organisation?.description : "" ;
+    //   var e = document.createElement('div');
+    //   e.innerHTML = text ? text : ""; 
+    //   return {__html: e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue};
+    
     //return {__html: organisation?.description};
     // If DOMParser is supported, use it
     // if (support) {
@@ -23,37 +29,33 @@ const OrganisationDetail: React.FC = () => {
     //   var doc = parser.parseFromString(str, 'text/html');
     //   return doc.body;
     // }
-  
-    // Otherwise, fallback to old-school method
-    // var div = document.getElementById("description-text"); 
-    //  //var dom = document.createElement('p');
-  
-    //  if(div){
-    //   div.innerHTML= str;
-    //  }
-   
- 
-   
-    //ReactDOM.render(dom, document.getElementById('description-text'));
-    // return div;
-  
-  };
+    //Otherwise, fallback to old-school method
+    var div = document.getElementById("description-text");
+     //var dom = document.createElement('p');
+     if(div){
+      div.innerHTML= organisation?.description ? organisation?.description : "" ;
+     }
+    //ReactDOM.render(div, document.getElementById('description-text'));
+    return div;
+  }
 
   return (
     <div className="organisation_view">
       {currentUserOrganization && organisation ? (
         <Fragment>
-        
-            <img className="organisation_logo" src={organisation?.imageUrl} alt=""></img>{" "}
-     
+          <img
+            className="organisation_logo"
+            src={organisation?.imageUrl}
+            alt=""
+          ></img>{" "}
           <h2> {organisation?.companyName}</h2>
           <p> Senast uppdaterad: {organisation?.updatedAt}</p>
-
-          <div className="organisation_description">           
+          <div className="organisation_description">
             <h3>Description</h3>
-            <p id="description-text"> {organisation?.description}</p>
-            {/* //<p>  dangerouslySetInnerHTML={createMarkup()} </p> */}
-          
+            <div id="description-text"> {organisation?.description}</div>
+           
+            
+            
           </div>
         </Fragment>
       ) : (

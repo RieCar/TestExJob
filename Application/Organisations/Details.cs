@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Application.Errors;
 using Contentful.Core;
 using Contentful.Core.Models;
@@ -39,7 +40,6 @@ namespace Application.Organisations
                 var queryBuilder = QueryBuilder<OrganisationDTO>.New
                 .ContentTypeIs("customerId").FieldEquals(f => f.Sys.Id, request.Organisation);
                 var entry = (await _client.GetEntries(queryBuilder)).FirstOrDefault();
-                Console.WriteLine("description:" + entry.Orders[0].Description);
     
                 if(entry == null){
                      throw new RestExceptions(HttpStatusCode.NotFound, new {organisation = "Not found"});         
@@ -50,17 +50,16 @@ namespace Application.Organisations
                 currentCompany.CompanyName = entry.CompanyName;
                 currentCompany.ImageUrl = await getImg(entry.CustomerIcon.SystemProperties.Id);
                 currentCompany.UpdatedAt = entry.Sys.UpdatedAt.ToString();
-                Console.WriteLine("description:" + entry.Description.ToString() + "not do string"+ entry.Description); 
-                currentCompany.Description = entry.Description.ToString();
+                currentCompany.Description = HttpUtility.HtmlDecode(entry.Description); //entry.Description;
+               //HttpUtility.HtmlEncode(entry.Description);
+               Console.WriteLine(currentCompany.Description);
                 foreach (var proj in entry.ProjectsId)
                 {
                     var project = new Project()
                     {
                         Id = proj.Sys.Id,
                         Titel = proj.ProjectTitel,
-                        Description = proj.Description
                     };
-                    Console.WriteLine(project.Titel);
                     currentCompany.Projects.Add(project);
                 };
                 foreach (var ord in entry.Orders)
@@ -68,11 +67,8 @@ namespace Application.Organisations
                     var order = new Order()
                     {
                         Id = ord.Sys.Id,
-                        Titel = ord.Title,
-                        Description = ord.Description,
-                    
+                        Titel = ord.Titel,
                     };
-                    Console.WriteLine(order.Titel);
 
                     currentCompany.Orders.Add(order);
                 };

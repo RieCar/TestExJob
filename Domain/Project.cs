@@ -17,5 +17,6 @@ namespace Domain
 
         public int TotalProjectDays { get; set; }
         public Contact Contact { get; set; }
+        public Employee ProjectLeader { get; set; }
     }
 }

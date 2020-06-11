@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { IStore } from '../../app/models/store';
-// import axios from 'axios';
 
 import '../../app/layout/style/sidebar.scss';
-// import agent from '../../app/api/agent';
 import { getProjectDetails } from '../../Features/reduxproject/projactions';
+import { getOrderDetails } from '../../Features/reduxorder/orderactions';
+
 
 const SideBar = () => {
 
@@ -19,14 +19,17 @@ const SideBar = () => {
       var searchId = event.target.dataset.id; 
       console.log("searchId", searchId);
       if(searchId){
-        dispatch(getProjectDetails(searchId));
+        
+        var isProject = currentProjects?.find(p=>p.id === searchId);
+        if(isProject){
+          dispatch(getProjectDetails(searchId));
+        }
+        else{
+          console.log("order searchID ", searchId)
+          dispatch(getOrderDetails(searchId));
+        }
       }
-     
-    //  if(searchId !== ""){
-    //    var respons = agent.Projects.ProjectDetails(searchId);
-    //    console.log("respons",respons);
-    //  }
-     
+
     };
       function ListItems(props: any) {
         var currentList = props.items;
@@ -37,7 +40,7 @@ const SideBar = () => {
           <div>
             <ul>
               {currentList?.map((item: any) => (
-                <li key={item.id}><button className="navbutton" type="button" data-id={item.id} onClick={HandleOnClick}> {item.titel}</button>
+                <li key={item.id}><button className="navbutton" type="button" data-id={item.id}  onClick={HandleOnClick}> {item.titel}</button>
                 </li>
               ))}
             </ul>

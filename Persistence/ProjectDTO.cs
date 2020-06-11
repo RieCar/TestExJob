@@ -16,6 +16,8 @@ namespace Persistence
         public string Status { get; set; }
 
         public ContactDTO OrganisationContactReference { get; set; }
+
+        public EmployeeDTO ProjectLeader { get; set; }
        
     }
 }
