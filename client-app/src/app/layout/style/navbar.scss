@@ -20,6 +20,10 @@
   .navbar-item a:link {
     text-decoration: none;
     color: #000000; 
+    letter-spacing: 1px;
+    font-size: 20px; 
+    text-transform: uppercase;
+    font-weight: 700;
   }
   
   .navbar-item a:visited {
@@ -34,5 +38,19 @@
   
   .navbar-item a:active {
     text-decoration: underline;
-    color:red; 
+    color:#d97575 
+  }
+
+  .logout-button{
+    background-color:rgb(255, 231, 149);
+    padding: 10px; 
+    border:none; 
+    border-radius: 10px; 
+    text-transform: uppercase; 
+    transition: all 0.3s;
+
+    &:hover{
+      background-color: #ffffff;
+      letter-spacing: 0.7px;
+    }
   }

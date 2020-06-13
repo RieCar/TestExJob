@@ -1,34 +1,39 @@
 @import '../style/breakpoints.scss';
 @import '../style/variables.scss';
 
-// .mainlogin{
-//     @extend %container;
-// }
 
-.ingress{
+.login{
     margin: 0 auto; 
-    width: 50%; 
+    width: 60%; 
     
     @media screen and (max-width: $breakpoint-small) {
         width: 80%;
     }
 }
 
-.ingress_title{
+.login-titel{
+    width: 70%; 
     text-align: center; 
-    padding: 10px 0; 
+    margin:0 auto; 
+    //padding: 10px 0; 
+}
+
+.login-content{
+    width: 60%; 
+    margin: 0 auto; 
+    padding: 20px 0 20px 0; 
 }
 
 
 .login_form{
     width:50%; 
-    border: 1px solid black; 
     text-align: center; 
     margin: 0 auto; 
     background-color: #f7bec8; 
     padding: 30px; 
     margin-top: 60px; 
-
+    box-shadow: 0px 0px 4px 2px rgb(114,120,120);
+    border-radius: 10px;
     @media screen and (max-width: $breakpoint-small) {
         width: 85%;
         padding: 10px;
@@ -40,6 +45,7 @@
   }
   .login_form_label{
     width:100%; 
+    letter-spacing: 1px;
   }
 
   .login_form_input{
@@ -57,11 +63,28 @@
   .login_form_button{
       width:30%; 
       padding: 15px; 
-      font-size: 1rem; 
+      font-size: 1.1111111111111112rem; 
+      font-weight: 300;
+      background-color: #e5f6f7; 
+      border: none; 
+      border-radius: 1.12rem; 
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin: 10px 0 10px 0; 
+      transition: all 0.3s; 
+      
+    &:hover{
+        background-color: #ffffff; 
+        letter-spacing: 1px;
+    }
 
       @media screen and (max-width: $breakpoint-small) {
         width: 50%;
         padding: 10px;
     }
+  }
+
+  .login_form_button:hover{
+   
   }
 

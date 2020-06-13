@@ -3,10 +3,36 @@
 
 
 .top-bar{
-    background-color:  #C5DCDB; 
+    // background-color:  #C5DCDB; 
     @extend %container;
    padding-top: 20px;
    padding-bottom: 20px; 
+
+   .header{
+     padding-top: 20px;
+     padding-bottom: 20px;  
+   }
+
+   .sitetitel{
+     width: 50%; 
+     margin: 0 auto; 
+     text-align: center;
+     padding: 20px 0 20px 0; 
+   }
+   .sitelogo{
+     font-size: 36px; 
+     font-weight: 700;
+     position:relative; 
+     padding-top: 20px; 
+   }
+
+   .sitelogo-icon{
+     width: 15px; 
+     position: absolute; 
+     bottom: -4px; 
+     color: #d97575; 
+     margin-left: 6px; 
+   }
 
 }
 
@@ -23,8 +49,8 @@
 
   .main{
     @extend %container;
-     min-height: 100vh; 
+    min-height: 100vh; 
     padding-bottom: 100px; 
     padding-top: 20px; 
-    height: fit-content;
+    // height: fit-content;
    }

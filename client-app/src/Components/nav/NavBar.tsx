@@ -32,7 +32,7 @@ export const NavBar: React.FC = () => {
             <li className="navbar-item">
               <NavLink
                 className="tags"
-                activeStyle={{ color: "red" }}
+                activeStyle={{ color: "#d97575" }}
                 exact
                 to="/"
               >
@@ -43,7 +43,7 @@ export const NavBar: React.FC = () => {
             <li className="navbar-item">
               <NavLink
                 className="tags"
-                activeStyle={{ color: "red" }}
+                activeStyle={{ color: "#d97575" }}
                 exact
                 to="/Card"
               >
@@ -57,13 +57,13 @@ export const NavBar: React.FC = () => {
                     <i className="far fa-user"></i> Welcome{" "}
                     {currentUser.displayName}{" "}
                   </p>
-                  <button onClick={handleOnClick}>Log Out </button>{" "}
+                  <button className="logout-button" onClick={handleOnClick}>Log Out </button>{" "}
                 </Fragment>
               ) : (
                 <Fragment>
                   <NavLink
                     className="tags"
-                    activeStyle={{ color: "red" }}
+                    activeStyle={{ color: "#d97575" }}
                     exact
                     to="/Login"
                   >

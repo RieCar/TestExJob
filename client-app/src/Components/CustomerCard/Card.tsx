@@ -47,6 +47,10 @@ const Card = () => {
       </div>
       <div className="rightaside">
         <Contact />
+        <div className="message-box"> 
+        <h3>Message</h3>
+        <p> </p>
+        </div>
       </div>
       <div className="clearfix"></div>
     </div>

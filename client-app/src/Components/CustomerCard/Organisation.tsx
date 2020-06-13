@@ -48,14 +48,13 @@ const OrganisationDetail: React.FC = () => {
             src={organisation?.imageUrl}
             alt=""
           ></img>{" "}
+          <div className="organisation-content"> 
           <h2> {organisation?.companyName}</h2>
           <p> Senast uppdaterad: {organisation?.updatedAt}</p>
           <div className="organisation_description">
             <h3>Description</h3>
             <div id="description-text"> {organisation?.description}</div>
-           
-            
-            
+          </div>
           </div>
         </Fragment>
       ) : (

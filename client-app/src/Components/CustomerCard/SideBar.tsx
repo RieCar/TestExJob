@@ -52,12 +52,12 @@ const SideBar = () => {
         <div>
               <h3>Dashboard</h3>     
             <ul className="sidebarmenu">
-                <li className="sidebaritem"><h3>Projects <span>({currentProjects?.length})</span></h3>
+                <li className="sidebaritem"><h4>Projects <span>({currentProjects?.length})</span></h4>
                 <ListItems items={currentProjects} /></li>
-                <li className="sidebaritem"><h3>Orders <span>({currentOrders?.length})</span></h3>
+                <li className="sidebaritem"><h4>Orders <span>({currentOrders?.length})</span></h4>
                 <ListItems items={currentOrders} />
                 </li>
-                <li className="sidebaritem"><h3> Contracts</h3></li>
+                <li className="sidebaritem"><h4> Contracts</h4></li>
             </ul>
         </div>
     )
