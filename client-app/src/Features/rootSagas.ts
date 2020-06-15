@@ -6,6 +6,7 @@ import { orgSagas } from "./reduxorganisation/orgsagas";
 import { contactSagas } from "./reduccontact/contactsagas";
 import { projectSagas } from "./reduxproject/projsagas";
 import { orderSagas } from "./reduxorder/ordersagas";
+import { contractSagas } from "./contracts/contractsaga";
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     ...contactSagas,
     ...projectSagas,
     ...orderSagas,
+    ...contractSagas
   ]);
 }

@@ -5,7 +5,6 @@ import { getAllByOrg } from "../../Features/reduccontact/contactactions";
 import { IContact, IContacts } from "../../app/models/contact";
 
 const Contact: React.FC = () => {
- 
   const currentUserOrganization = useSelector(
     (store: IStore) => store.currentUser?.organisation
   );
@@ -16,13 +15,12 @@ const Contact: React.FC = () => {
 
   useEffect(() => {
     if (currentUserOrganization) {
-
       dispatch(getAllByOrg(currentUserOrganization));
     }
   }, [currentUserOrganization]);
 
-  function ContactList(props:any) {
-      console.log("props", props.current.data);
+  function ContactList(props: any) {
+    console.log("props", props.current.data);
     var contList = props.current;
     const listofcont = (
       <div>
@@ -38,21 +36,17 @@ const Contact: React.FC = () => {
         </ul>
       </div>
     );
-    return <div>{ listofcont } </div>
+    return <div>{listofcont} </div>;
   }
   console.log("currentcontacts", currentContacts);
   return (
     <div>
       <h3> Kontakter</h3>
       {currentContacts && currentContacts[0]?.fullName ? (
-    <ContactList current={currentContacts}/>
-      )
-      :(
-          <p> Inga kontakter</p>
-      )
-      }
-    
-  
+        <ContactList current={currentContacts} />
+      ) : (
+        <p> Inga kontakter</p>
+      )}
     </div>
   );
 };

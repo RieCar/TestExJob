@@ -5,6 +5,7 @@ import { IStore } from '../../app/models/store';
 import '../../app/layout/style/sidebar.scss';
 import { getProjectDetails } from '../../Features/reduxproject/projactions';
 import { getOrderDetails } from '../../Features/reduxorder/orderactions';
+import { setCurrentContract, setCurrentContractSuccess } from '../../Features/contracts/contractactions';
 
 
 const SideBar = () => {
@@ -12,6 +13,8 @@ const SideBar = () => {
     const currentProjects = useSelector((store: IStore) => store.currentOrg?.projects);
 
     const currentOrders = useSelector((store: IStore) => store.currentOrg?.orders);
+
+    const currentContract = useSelector((store:IStore) => store.currentOrg?.contract);
     const dispatch = useDispatch(); 
 
     const HandleOnClick = (event: any) => {
@@ -24,9 +27,15 @@ const SideBar = () => {
         if(isProject){
           dispatch(getProjectDetails(searchId));
         }
-        else{
+        else if (currentOrders?.find(p=>p.id === searchId)){
           console.log("order searchID ", searchId)
           dispatch(getOrderDetails(searchId));
+        }
+        else{
+          if(currentContract){
+            dispatch(setCurrentContractSuccess(currentContract));
+          }
+          
         }
       }
 
@@ -57,7 +66,11 @@ const SideBar = () => {
                 <li className="sidebaritem"><h4>Orders <span>({currentOrders?.length})</span></h4>
                 <ListItems items={currentOrders} />
                 </li>
-                <li className="sidebaritem"><h4> Contracts</h4></li>
+                <li className="sidebaritem"><h4> Contract</h4>
+                <ul> 
+                     <li key={currentContract?.id}><button className="navbutton" type="button" data-id={currentContract?.id}  onClick={HandleOnClick}> {currentContract?.titel}</button></li>
+                </ul>
+                </li>
             </ul>
         </div>
     )

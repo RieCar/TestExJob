@@ -52,6 +52,8 @@ namespace Application.Organisations
                 currentCompany.UpdatedAt = entry.Sys.UpdatedAt.ToString();
                 currentCompany.Description = HttpUtility.HtmlDecode(entry.Description); //entry.Description;
                //HttpUtility.HtmlEncode(entry.Description);
+               currentCompany.Message = entry.Message;
+               
                Console.WriteLine(currentCompany.Description);
                 foreach (var proj in entry.ProjectsId)
                 {
@@ -72,6 +74,15 @@ namespace Application.Organisations
 
                     currentCompany.Orders.Add(order);
                 };
+
+                var contract = new Contract(){
+                    Id = entry.Contract.Sys.Id,
+                    Titel = entry.Contract.Titel,
+                    Description = entry.Contract.Description,
+                    FileUrl = entry.Contract.ContractFile.File.Url,
+                }; 
+                Console.WriteLine(contract.Id);
+                currentCompany.Contract = contract; 
                 return currentCompany;
             }
 

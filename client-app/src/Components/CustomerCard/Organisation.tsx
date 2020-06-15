@@ -50,7 +50,7 @@ const OrganisationDetail: React.FC = () => {
           ></img>{" "}
           <div className="organisation-content"> 
           <h2> {organisation?.companyName}</h2>
-          <p> Senast uppdaterad: {organisation?.updatedAt}</p>
+          <p><small> Senast uppdaterad: {organisation?.updatedAt}</small></p>
           <div className="organisation_description">
             <h3>Description</h3>
             <div id="description-text"> {organisation?.description}</div>
@@ -60,7 +60,7 @@ const OrganisationDetail: React.FC = () => {
       ) : (
         <Fragment>
           <h2> Details</h2>
-          <p> Du måste vara inloggad för att se innehållet här </p>{" "}
+          <p> Oops! Something wrong and it's not your fault. Try again later! </p>{" "}
         </Fragment>
       )}
     </div>

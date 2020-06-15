@@ -3,6 +3,7 @@ import { IOrganisation } from './organisation';
 import { IContact, IContacts } from './contact';
 import { IProject } from './project';
 import { IOrder } from './order';
+import { IContract } from './contract';
 
 
 export interface IStore {
@@ -10,5 +11,6 @@ export interface IStore {
     currentOrg?: IOrganisation,
     currentContacts?: IContact[],
     currentProject?: IProject,
-    currentOrder?: IOrder
+    currentOrder?: IOrder,
+    currentContract?: IContract
 }

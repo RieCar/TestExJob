@@ -5,7 +5,6 @@ namespace Domain
 {
     public class Organisation
     {
-
         public Organisation()
         {
             Projects = new List<Project>();
@@ -17,10 +16,13 @@ namespace Domain
         public string ImageUrl { get; set; }
 
         public string UpdatedAt { get; set; }
-        //public string CustomerDescription { get; set; }
+  
         public string Description { get; set; }
         public List<Project> Projects { get; set; }
 
         public List<Order> Orders { get; set; }
+
+        public Contract Contract { get; set; }
+        public string Message { get; set; }
     }
 }

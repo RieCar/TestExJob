@@ -16,9 +16,7 @@ function* handleOnGetDetails(action: AnyAction) {
     );
 console.log("project",  project);
     if (project) {
-      yield put(getProjectDetailsSuccess(project));
-      // history.push({pathname:'/ProjectDetail'});
-      
+      yield put(getProjectDetailsSuccess(project));      
     }
   } catch (error) {
       yield put(getProjectDetailsFailure(error.message))

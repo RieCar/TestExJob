@@ -10,6 +10,8 @@ import "../../app/layout/style/card.scss";
 //import { getProjectDetails } from "../../Features/reduxproject/projactions";
 import ProjectDetail from "../detailedView/Project";
 import OrderDetail from "../detailedView/Order";
+import Message from "./Message";
+import Contract from "../detailedView/Contract";
 
 const Card = () => {
   const currentUserOrganization = useSelector(
@@ -43,14 +45,15 @@ const Card = () => {
         <OrderDetail/>
         <div className="clearfix"></div>
         <ProjectDetail />
+        <div className="clearfix"></div>
+        <Contract/>
             
       </div>
       <div className="rightaside">
+        
         <Contact />
-        <div className="message-box"> 
-        <h3>Message</h3>
-        <p> </p>
-        </div>
+        <Message/>
+     
       </div>
       <div className="clearfix"></div>
     </div>

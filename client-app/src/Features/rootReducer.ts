@@ -5,13 +5,15 @@ import orgReducer from './reduxorganisation/orgreducer'
 import contactReducer from './reduccontact/contactreducer'
 import projectReducer from './reduxproject/projreducer'
 import orderReducer from './reduxorder/orderreducer'
+import contractReducer from './contracts/contractreducer'
 
 const rootReducer = combineReducers({
     currentUser: userReducer,
     currentOrg: orgReducer,
     currentContacts: contactReducer,
     currentProject: projectReducer,
-    currentOrder: orderReducer
+    currentOrder: orderReducer,
+    currentContract: contractReducer
    
 })
 

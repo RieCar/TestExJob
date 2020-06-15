@@ -11,15 +11,13 @@ namespace Persistence
        
         public string CompanyName { get; set; }
         public Asset CustomerIcon { get; set; }   
-
-        //public string CustomerDescription { get; set; }  
-
         public string Description { get; set; }
          
         public List<ProjectDTO> ProjectsId { get; set; }
 
          public List<OrderDTO> Orders { get; set; }
 
-         public List<ContractDTO> Contracts { get; set; }
+        public ContractDTO Contract { get; set; }
+         public string Message { get; set; }
     }
 }

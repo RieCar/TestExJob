@@ -17,8 +17,6 @@ function* handleOnGetOrderDetails(action: AnyAction) {
 console.log("order",  order);
     if (order) {
       yield put(getOrderDetailsSuccess(order));
-      //history.push({pathname:'/Order'});
-      
     }
   } catch (error) {
       yield put(getOrderDetailsFailure(error.message))

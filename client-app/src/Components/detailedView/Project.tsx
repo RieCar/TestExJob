@@ -1,50 +1,108 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { IStore } from "../../app/models/store";
 
 import "../../app/layout/style/project.scss";
+import { NONAME } from "dns";
 
 const ProjectDetail: React.FC = () => {
   const project = useSelector((store: IStore) => store.currentProject);
   const projectStatus = useSelector(
     (store: IStore) => store.currentProject?.currentStatus
   );
+  const [isHidden, setisHidden] = useState(false);
+  function handleOnToggle(event: any) {
+    event.preventDefault();
+
+    var doc = document.getElementById("project");
+    if (doc) {
+      if (isHidden === false) {
+        doc.style.display = "none";
+        setisHidden(true);
+      } else {
+        doc.style.display = "block";
+        setisHidden(false);
+      }
+    }
+  }
 
   return (
     <div className="projectview">
-      <h2>Selected Project</h2>
+      <h2 onClick={handleOnToggle}>Selected Project </h2>
       {project && projectStatus ? (
         <Fragment>
-          <div className="project">
+          <div id="project" className="project">
             <h3> {project.titel}</h3>
             <div className="projectpart_main">
-              <p> Day of start: {project.startDate}</p>
-              <p> Day of end: {project.endDate}</p>
-              <h4> Description</h4>
-              <p>{project.description}</p>
+              <div className="projectpart_content">
+                <p>
+                  {" "}
+                  <b>Date of start: </b> {project.startDate}
+                </p>
+                <p>
+                  {" "}
+                  <b>Date of end: </b> {project.endDate}
+                </p>
+              </div>
+              <div className="projectpart_content">
+                <h4> Description</h4>
+                <p>{project.description}</p>
+              </div>
             </div>
             <div className="projectpart_aside">
-              <p> Status: {project.currentStatus}</p>
-              <p> Total days of project: {project.totalProjectDays}</p>
-              <h4>Kontakt</h4>
-              <p>Name: {project.contact?.fullName}</p>
-              <p>Titel: {project.contact?.titel}</p>
-              <p>
-                Email:{" "}
-                <a href="mailto:{project.contact?.email}">
+              <div className="projectpart_content">
+                <p>
                   {" "}
-                  {project.contact?.email}
-                </a>
-              </p>
-              <p>Phone: {project.contact?.phoneNumber}</p>
-              <h4> Project leader</h4>
-              <p>Name: {project.projectLeader?.fullname}</p>
-              <p>Titel: {project.projectLeader?.titel}</p>
-              <p>
-                Email: <a href="mailto:{project.projectleader?.email}"> {project.projectLeader?.email} </a>{" "}
-               
-              </p>
-              <p>Phone: {project.projectLeader?.phonenumber}</p>
+                  <b>Status: </b> {project.currentStatus}
+                </p>
+                <p>
+                  {" "}
+                  <b>Total days of project: </b> {project.totalProjectDays}
+                </p>
+              </div>
+              <div className="projectpart_content">
+                <div className="projectpart-contentitem">
+                  <h4>Kontakt</h4>
+                  <p>
+                    {" "}
+                    <b>Name: </b> {project.contact?.fullName}
+                  </p>
+                  <p>
+                    <b>Titel: </b> {project.contact?.titel}
+                  </p>
+                  <p>
+                    <b>Email: </b>{" "}
+                    <a href="mailto:{project.contact?.email}">
+                      {" "}
+                      {project.contact?.email}
+                    </a>
+                  </p>
+                  <p>
+                    <b>Phone: </b> {project.contact?.phoneNumber}
+                  </p>
+                </div>
+                <div className="projectpart_contentitem">
+                  <h4> Project leader</h4>
+                  <p>
+                    {" "}
+                    <b>Name: </b> {project.projectLeader?.fullname}
+                  </p>
+                  <p>
+                    <b>Titel: </b> {project.projectLeader?.titel}
+                  </p>
+                  <p>
+                    <b>Email: </b>{" "}
+                    <a href="mailto:{project.projectleader?.email}">
+                      {" "}
+                      {project.projectLeader?.email}{" "}
+                    </a>{" "}
+                  </p>
+                  <p>
+                    <b>Phone: </b>
+                    {project.projectLeader?.phonenumber}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Fragment>
