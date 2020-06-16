@@ -6,7 +6,7 @@ import { IContact, IContacts } from "../../app/models/contact";
 
 const Contact: React.FC = () => {
   const currentUserOrganization = useSelector(
-    (store: IStore) => store.currentUser?.organisation
+    (store: IStore) => store.currentUser?.data.organisation
   );
 
   const currentContacts = useSelector((store: IStore) => store.currentContacts);

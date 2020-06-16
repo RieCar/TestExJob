@@ -1,35 +1,37 @@
-@import '../style/breakpoints.scss';
-@import '../style/variables.scss';
+@import "../style/breakpoints.scss";
+@import "../style/variables.scss";
 
-.projectview{
-    padding: 20px 0; 
+.projectview {
+  padding: 20px 0;
 }
-.project{
-    width: 100%; 
-   
-}
-
-.projectpart_main{
-    width: 65%; 
-    float:left;
+.project {
+  width: 100%;
 }
 
-.projectpart_content{
-    margin-top:20px; 
+.projectpart_main {
+  width: 65%;
+  float: left;
 }
 
-.projectpart_contentitem{
-    margin-top:10px; 
+.projectpart_content {
+  margin-top: 20px;
 }
-.projectpart_aside{
-    float:right; 
-    width: 30%; 
-    padding-left:30px; 
 
-    @media screen and (max-width: $breakpoint-small) {
-        float:left;
-        padding-left:5px;
-        font-size: 12px;
-        width:35%;
-     }
+.projectpart_contentitem {
+  margin-top: 10px;
+}
+.projectpart_aside {
+  float: right;
+  width: 30%;
+  padding-left: 30px;
+
+  @media screen and (max-width: $breakpoint-large) {
+    font-size: 16px;
+  }
+  @media screen and (max-width: $breakpoint-small) {
+    float: left;
+    padding-left: 5px;
+    font-size: 12px;
+    width: 35%;
+  }
 }

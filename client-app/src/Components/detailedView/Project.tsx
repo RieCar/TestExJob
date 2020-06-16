@@ -7,9 +7,9 @@ import { NONAME } from "dns";
 
 const ProjectDetail: React.FC = () => {
   const project = useSelector((store: IStore) => store.currentProject);
-  const projectStatus = useSelector(
-    (store: IStore) => store.currentProject?.currentStatus
-  );
+  // const projectTitel = useSelector(
+  //   (store: IStore) => store.currentProject?.titel
+  // );
   const [isHidden, setisHidden] = useState(false);
   function handleOnToggle(event: any) {
     event.preventDefault();
@@ -29,7 +29,7 @@ const ProjectDetail: React.FC = () => {
   return (
     <div className="projectview">
       <h2 onClick={handleOnToggle}>Selected Project </h2>
-      {project && projectStatus ? (
+      {project && project.titel ? (
         <Fragment>
           <div id="project" className="project">
             <h3> {project.titel}</h3>
@@ -37,11 +37,11 @@ const ProjectDetail: React.FC = () => {
               <div className="projectpart_content">
                 <p>
                   {" "}
-                  <b>Date of start: </b> {project.startDate}
+                  <b>Start: </b> {project.startDate ?project.startDate : "-" }
                 </p>
                 <p>
                   {" "}
-                  <b>Date of end: </b> {project.endDate}
+                  <b>End: </b> {project.endDate ? project.endDate : "-"}
                 </p>
               </div>
               <div className="projectpart_content">

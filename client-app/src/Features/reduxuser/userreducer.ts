@@ -16,9 +16,14 @@ export default function userReducer(state = initialState, action: AnyAction) {
         error: null,
         message:null
       };
-      return Object.assign({}, state, newState); //action.payload.loginformation;
+      return Object.assign({}, state, newState); 
     case UserActions.LOGIN_USER_SUCCESS:
-      return action.payload.user;
+      newState = {
+        data: action.payload.user,
+        error: null,
+        message: null
+      };
+      return Object.assign({}, state, newState);;
     case UserActions.LOGIN_USER_FAILURE:
       newState = {
         data: null,

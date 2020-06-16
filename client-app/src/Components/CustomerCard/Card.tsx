@@ -15,7 +15,7 @@ import Contract from "../detailedView/Contract";
 
 const Card = () => {
   const currentUserOrganization = useSelector(
-    (store: IStore) => store.currentUser?.organisation
+    (store: IStore) => store.currentUser?.data.organisation
   );
   const currentOrderId = useSelector(
     (store: IStore) => store.currentOrder?.id
@@ -33,7 +33,7 @@ const Card = () => {
       dispatch(getCurrent(currentUserOrganization));
     }
 
-  }, [currentUserOrganization,currentOrderId]);
+  }, [currentUserOrganization]);
 
   return (
     <div className="maincard">

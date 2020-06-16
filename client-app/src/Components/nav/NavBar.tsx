@@ -4,16 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../Features/reduxuser/useractions";
 import { IStore } from "../../app/models/store";
 import "../../app/layout/style/navbar.scss";
-//import Login from "../Login";
 
 export const NavBar: React.FC = () => {
-  //const [isLoggedIn, setIsLoggedIn] = useState<Boolean | null>(false);
-  // const [user, setUser ] = useState<IUser | null>(null);
+
   const currentUser = useSelector((store: IStore) => store.currentUser);
 
-  console.log(currentUser?.displayName);
-
-  //const [user, setUser] = useState<IUser | null>(null);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -51,13 +46,15 @@ export const NavBar: React.FC = () => {
               </NavLink>
             </li>
             <li className="navbar-item">
-              {currentUser && currentUser.displayName ? (
+              {currentUser && currentUser.data?.displayName ? (
                 <Fragment>
                   <p>
                     <i className="far fa-user"></i> Welcome{" "}
-                    {currentUser.displayName}{" "}
+                    {currentUser?.data?.displayName}{" "}
                   </p>
-                  <button className="logout-button" onClick={handleOnClick}>Log Out </button>{" "}
+                  <button className="logout-button" onClick={handleOnClick}>
+                    Log Out{" "}
+                  </button>{" "}
                 </Fragment>
               ) : (
                 <Fragment>

@@ -18,7 +18,7 @@ import ProjectDetail from "../Components/detailedView/Project";
 function App() {
   const currentUser = useSelector(
     (store: IStore) => store.currentUser);
-    console.log('token', currentUser?.token);
+    console.log('token', currentUser?.data?.token);
   return (
     <div className="App">
       <PageLayout>
@@ -28,7 +28,7 @@ function App() {
                 <Route exact path="/" component={HomePage} />
                   <Route exact path="/Login" component={Login}/> 
                             
-                  <PrivateRoute exact path="/Card" isToken={currentUser?.token} component={Card} />
+                  <PrivateRoute exact path="/Card" isToken={currentUser?.data?.token} component={Card} />
                  
                   <Route component={NotFound} />
                  

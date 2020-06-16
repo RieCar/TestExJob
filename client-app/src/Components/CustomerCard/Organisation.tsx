@@ -1,50 +1,43 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { IStore } from "../../app/models/store";
-import { getCurrent } from "../../Features/reduxorganisation/orgactions";
 
 import "../../app/layout/style/organisation.scss";
-import ReactDOM from "react-dom";
-import { IOrganisation } from "../../app/models/organisation";
 
-import _ from 'lodash';
-
+// import _, { orderBy } from "lodash";
+import { richTextFromMarkdown } from "@contentful/rich-text-from-markdown";
+// import ReactDOM from "react-dom";
 
 const OrganisationDetail: React.FC = () => {
- 
   const currentUserOrganization = useSelector(
-    (store: IStore) => store.currentUser?.organisation
+    (store: IStore) => store.currentUser?.data.organisation
   );
   const organisation = useSelector((store: IStore) => store.currentOrg);
 
-  const { richTextFromMarkdown } = require('@contentful/rich-text-from-markdown');
+  // const [Markdown, setNewMarkdown] = useState({
+  //   content: []});
 
-   function transformtoHtml(input:string | undefined) {
-    //const copy = input;
+  // var body = new Array;
 
-    if(!input){
-      return null; 
-    }
-    console.log(input);
-    return  richTextFromMarkdown(input);
-  }
-var desc = transformtoHtml(organisation?.description); console.log(desc);
-//   async function Decode(input:any){
-//   const document = await richTextFromMarkdown(input);
-//   let homeArray = new Array(document.length);
-// let i = 0
+  // useEffect(() => {
+  //   const transformMarkdown = async (content: string | undefined) => {
+  //     if (!content) {
+  //       return null;
+  //     }
+  //     console.log("inuti", content);
+  //     return await richTextFromMarkdown(content);
+  //   };
 
-// for (var key in document) {
-//     homeArray[i] =  document[key];
-//     i = i + 1;
-// }
-//  console.log(homeArray);
+  //  transformMarkdown (organisation?.description).then((content) => {
+  //     body = content
+  //     setNewMarkdown(content)
+  //     console.log(body)
+  //     return body;
+  
+  //   });
+  // }, [organisation?.description]);
 
- 
-//   return {__html : homeArray}; 
-// }
-//  var desc = Decode(organisation?.description).then(resp => resp.__html); 
 
   return (
     <div className="organisation_view">
@@ -55,20 +48,34 @@ var desc = transformtoHtml(organisation?.description); console.log(desc);
             src={organisation?.imageUrl}
             alt=""
           ></img>{" "}
-          <div className="organisation-content"> 
-          <h2> {organisation?.companyName}</h2>
-          <p><small> Senast uppdaterad: {organisation?.updatedAt}</small></p>
-          <div className="organisation_description">
-            <h3>Description</h3>
-      <div id="description-text" >{organisation.description} </div>
-      {/* <div> {desc}</div> */}
-          </div>
+          <div className="organisation-content">
+            <h2> {organisation?.companyName}</h2>
+            <p>
+              <small> Senast uppdaterad: {organisation?.updatedAt}</small>
+            </p>
+            <div className="organisation_description">
+              <h3>Description</h3>
+              <div id="description-text">
+                {organisation?.description}
+          
+              </div>
+              <div>
+              {/* {body.map(function(content, i){
+                console.log("content", content)
+                return content(i)
+              })} */}
+            
+              </div>
+            </div>
           </div>
         </Fragment>
       ) : (
         <Fragment>
           <h2> Details</h2>
-          <p> Oops! Something wrong and it's not your fault. Try again later! </p>{" "}
+          <p>
+            {" "}
+            Oops! Something wrong and it's not your fault. Try again later!{" "}
+          </p>{" "}
         </Fragment>
       )}
     </div>

@@ -40,49 +40,73 @@ namespace Application.Organisations
                 var queryBuilder = QueryBuilder<OrganisationDTO>.New
                 .ContentTypeIs("customerId").FieldEquals(f => f.Sys.Id, request.Organisation);
                 var entry = (await _client.GetEntries(queryBuilder)).FirstOrDefault();
-    
-                if(entry == null){
-                     throw new RestExceptions(HttpStatusCode.NotFound, new {organisation = "Not found"});         
+                Console.WriteLine(entry.CompanyName);
+                if (entry == null)
+                {
+                    throw new RestExceptions(HttpStatusCode.NotFound, new { organisation = "Not found" });
                 }
                 var currentCompany = new Organisation();
 
                 currentCompany.CustomerId = entry.Sys.Id;
                 currentCompany.CompanyName = entry.CompanyName;
-                currentCompany.ImageUrl = await getImg(entry.CustomerIcon.SystemProperties.Id);
+                Console.WriteLine(entry.CustomerIcon);
+                if (entry.CustomerIcon != null)
+                {
+                    currentCompany.ImageUrl = await getImg(entry.CustomerIcon.SystemProperties.Id);
+                }
+
                 currentCompany.UpdatedAt = entry.Sys.UpdatedAt.ToString();
-                currentCompany.Description = entry.Description; //entry.Description;
-               //HttpUtility.HtmlEncode(entry.Description);
-               currentCompany.Message = entry.Message;
-               
-               Console.WriteLine(currentCompany.Description);
-                foreach (var proj in entry.ProjectsId)
+                if (!String.IsNullOrEmpty(entry.Description))
                 {
-                    var project = new Project()
-                    {
-                        Id = proj.Sys.Id,
-                        Titel = proj.ProjectTitel,
-                    };
-                    currentCompany.Projects.Add(project);
-                };
-                foreach (var ord in entry.Orders)
+                    currentCompany.Description = entry.Description;
+                }
+
+                if (!String.IsNullOrEmpty(entry.Message))
                 {
-                    var order = new Order()
+                    currentCompany.Message = entry.Message;
+                }
+
+                if (entry.ProjectsId != null)
+                {
+                    foreach (var proj in entry.ProjectsId)
                     {
-                        Id = ord.Sys.Id,
-                        Titel = ord.Titel,
+                        var project = new Project()
+                        {
+                            Id = proj.Sys.Id,
+                            Titel = proj.ProjectTitel,
+                        };
+                        currentCompany.Projects.Add(project);
                     };
+                }
+                if (entry.Orders != null)
+                {
+                    foreach (var ord in entry.Orders)
+                    {
+                        var order = new Order()
+                        {
+                            Id = ord.Sys.Id,
+                            Titel = ord.Titel,
+                        };
 
-                    currentCompany.Orders.Add(order);
-                };
+                        currentCompany.Orders.Add(order);
+                    };
+                }
+                if (entry.Contract != null)
+                {
+                    var contract = new Contract()
+                    {
+                        Id = entry.Contract.Sys.Id,
+                        Titel = entry.Contract.Titel,
+                        FileUrl = entry.Contract.ContractFile.File.Url
+                    };
+                    if (!String.IsNullOrEmpty(entry.Contract.Description))
+                    {
+                        contract.Description = entry.Contract.Description;
+                    }
+                  
+                    currentCompany.Contract = contract;
+                }
 
-                var contract = new Contract(){
-                    Id = entry.Contract.Sys.Id,
-                    Titel = entry.Contract.Titel,
-                    Description = entry.Contract.Description,
-                    FileUrl = entry.Contract.ContractFile.File.Url,
-                }; 
-                Console.WriteLine(contract.Id);
-                currentCompany.Contract = contract; 
                 return currentCompany;
             }
 

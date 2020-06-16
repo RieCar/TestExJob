@@ -5,7 +5,6 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSagas'
 import rootReducer from './rootReducer'
 
-// Initial store
 const initialStore = {
    
 }
@@ -20,4 +19,3 @@ export const initializeStore = (initialState = initialStore) => {
 
     return store;
 } 
-// export default createStore(reducer, composeWithDevTools());

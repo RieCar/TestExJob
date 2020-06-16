@@ -36,37 +36,60 @@ namespace Application.Orders
 
                 if (entry == null)
                 {
-                    throw new RestExceptions(HttpStatusCode.NotFound, new { error = "Something went wrong. We couldn't find what you looking for " });
+                    throw new RestExceptions(HttpStatusCode.NotFound, new { order = "No order found" });
                 }
                 var currentOrder = new Order();
                 currentOrder.Id = entry.Sys.Id;
                 currentOrder.Titel = entry.Titel;
                 currentOrder.Description = entry.Description;
-                currentOrder.StartDate = entry.StartDate.Date.ToString("yyyy MM dd");
-                currentOrder.EndDate = entry.EndDate.Date.ToString("yyyy MM dd");
-                currentOrder.Status = entry.Status;
+                if (entry.StartDate != DateTime.MinValue)
+                {
+                    currentOrder.StartDate = entry.StartDate.ToString("yyyy MM dd");
+                }
+
+
+                if (entry.EndDate != DateTime.MinValue)
+                {
+                    currentOrder.EndDate = entry.EndDate.ToString("yyyy MM dd");
+                }
+
+                if (!String.IsNullOrEmpty(entry.Status))
+                {
+                    currentOrder.Status = entry.Status;
+                }
+
                 currentOrder.Estimatedcost = entry.EstimatedCost;
 
-                var contact = new Domain.Contact()
+                if (entry.ContactAtOrganisation != null)
                 {
-                    FullName = entry.ContactAtOrganisation.FirstName + " " + entry.ContactAtOrganisation.LastName,
-                    Email = entry.ContactAtOrganisation.Email,
-                    PhoneNumber = entry.ContactAtOrganisation.PhoneNumber,
-                    Titel = entry.ContactAtOrganisation.Titel,
-                    Id = entry.ContactAtOrganisation.Sys.Id,
-                };
-                currentOrder.Contact = contact;
+                    var contact = new Domain.Contact()
+                    {
+                        FullName = entry.ContactAtOrganisation.FirstName + " " + entry.ContactAtOrganisation.LastName,
+                        Email = entry.ContactAtOrganisation.Email,
+                        PhoneNumber = entry.ContactAtOrganisation.PhoneNumber,
+                        Titel = entry.ContactAtOrganisation.Titel,
+                        Id = entry.ContactAtOrganisation.Sys.Id,
+                    };
+                    currentOrder.Contact = contact;
+                }
 
-                var currentEmployee = new Employee()
+                if (entry.ContactAtCamelonta != null)
                 {
-                    Fullname = entry.ContactAtCamelonta.FullName,
-                    Titel = entry.ContactAtCamelonta.Titel,
-                    Email = entry.ContactAtCamelonta.Email,
-                    Phonenumber = entry.ContactAtCamelonta.Phone
-                };
-                currentOrder.ContactAtCamelonta = currentEmployee;
+                    var currentEmployee = new Employee()
+                    {
+                        Fullname = entry.ContactAtCamelonta.FullName,
+                        Titel = entry.ContactAtCamelonta.Titel,
+                        Email = entry.ContactAtCamelonta.Email,
+                        Phonenumber = entry.ContactAtCamelonta.Phone
+                    };
+                    currentOrder.ContactAtCamelonta = currentEmployee;
+                }
 
-                currentOrder.TotalOrderDays = getDifferens(entry.StartDate, entry.EndDate);
+                if (currentOrder.StartDate != "" && currentOrder.EndDate != "")
+                {
+                    currentOrder.TotalOrderDays = getDifferens(entry.StartDate, entry.EndDate);
+                }
+
                 return currentOrder;
             }
 

@@ -1,14 +1,17 @@
 import { AxiosResponse } from "axios";
 
 export interface IUser{
-
-    userName: string, 
-    displayName: string,
-    token: string,
-    organisation: string,
-    isLoggedIn?: boolean,
+    data:{ 
+        userName: string, 
+        displayName: string,
+        token: string,
+        organisation: string,
+        isLoggedIn?: boolean,
+    }
     error?: {},
     message: AxiosResponse 
+   
+ 
 
 }
 

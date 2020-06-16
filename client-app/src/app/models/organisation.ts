@@ -5,7 +5,7 @@ export interface IOrganisation{
     customerId?:string;
     companyName?:string; 
     imageUrl?: string; 
-    description?: any;
+    description?: string;
     projects?: any[];
     orders?: any[];
     contract?: IContract; 
