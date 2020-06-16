@@ -1,15 +1,15 @@
 import { IContract } from "../../app/models/contract"
 
 export enum ContractActions{
-    SET_CURRENTCONTRACT = 'SET_CURRENTCONTRACT',
+    CLICKED_CURRENTCONTRACT = 'CLICKED_CURRENTCONTRACT',
     SET_CURRENTCONTRACT_SUCCESS = 'SET_CURRENTCONTRACT_SUCCESS',
     SET_CURRENTCONTRACT_FAILURE = 'SET_CURRENTCONTRACT_FAILURE',
 
 }
 
 export const setCurrentContract = (contract:IContract) => ({
-    type: 'SET_CURRENTCONTRACT',
-    payload: {contract}
+    type: 'CLICKED_CURRENTCONTRACT',
+    payload: {clicked : contract}
 })
 
 export const setCurrentContractSuccess = (contract:IContract) => ({

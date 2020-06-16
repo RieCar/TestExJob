@@ -5,6 +5,7 @@ import { AnyAction } from "redux";
 import { useState } from "react";
 import { IOrganisation } from "../../app/models/organisation";
 
+const { richTextFromMarkdown } = require('@contentful/rich-text-from-markdown');
 
 function* handleOnGetCurrent(action: AnyAction) {
   const organisationId = action.payload.organisationId;
@@ -17,6 +18,8 @@ function* handleOnGetCurrent(action: AnyAction) {
     );
 console.log("org",  organisation);
     if (organisation) {
+      // yield(richTextFromMarkdown(organisation.description))
+      // console.log("saga desc", organisation.description);
       yield put(getCurrentSuccess(organisation));
     }
   } catch (error) {

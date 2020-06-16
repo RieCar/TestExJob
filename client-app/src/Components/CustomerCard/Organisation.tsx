@@ -6,38 +6,45 @@ import { getCurrent } from "../../Features/reduxorganisation/orgactions";
 
 import "../../app/layout/style/organisation.scss";
 import ReactDOM from "react-dom";
+import { IOrganisation } from "../../app/models/organisation";
 
-// import { map } from "lodash/fp";
+import _ from 'lodash';
+
 
 const OrganisationDetail: React.FC = () => {
+ 
   const currentUserOrganization = useSelector(
     (store: IStore) => store.currentUser?.organisation
   );
   const organisation = useSelector((store: IStore) => store.currentOrg);
 
-  function htmlDecode(input:any) {
-    // var text = ""; 
-    //   text = organisation?.description ? organisation?.description : "" ;
-    //   var e = document.createElement('div');
-    //   e.innerHTML = text ? text : ""; 
-    //   return {__html: e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue};
-    
-    //return {__html: organisation?.description};
-    // If DOMParser is supported, use it
-    // if (support) {
-    //   var parser = new DOMParser();
-    //   var doc = parser.parseFromString(str, 'text/html');
-    //   return doc.body;
-    // }
-    //Otherwise, fallback to old-school method
-    var div = document.getElementById("description-text");
-     //var dom = document.createElement('p');
-     if(div){
-      div.innerHTML= organisation?.description ? organisation?.description : "" ;
-     }
-    //ReactDOM.render(div, document.getElementById('description-text'));
-    return div;
+  const { richTextFromMarkdown } = require('@contentful/rich-text-from-markdown');
+
+   function transformtoHtml(input:string | undefined) {
+    //const copy = input;
+
+    if(!input){
+      return null; 
+    }
+    console.log(input);
+    return  richTextFromMarkdown(input);
   }
+var desc = transformtoHtml(organisation?.description); console.log(desc);
+//   async function Decode(input:any){
+//   const document = await richTextFromMarkdown(input);
+//   let homeArray = new Array(document.length);
+// let i = 0
+
+// for (var key in document) {
+//     homeArray[i] =  document[key];
+//     i = i + 1;
+// }
+//  console.log(homeArray);
+
+ 
+//   return {__html : homeArray}; 
+// }
+//  var desc = Decode(organisation?.description).then(resp => resp.__html); 
 
   return (
     <div className="organisation_view">
@@ -53,7 +60,8 @@ const OrganisationDetail: React.FC = () => {
           <p><small> Senast uppdaterad: {organisation?.updatedAt}</small></p>
           <div className="organisation_description">
             <h3>Description</h3>
-            <div id="description-text"> {organisation?.description}</div>
+      <div id="description-text" >{organisation.description} </div>
+      {/* <div> {desc}</div> */}
           </div>
           </div>
         </Fragment>

@@ -50,7 +50,7 @@ namespace Application.Organisations
                 currentCompany.CompanyName = entry.CompanyName;
                 currentCompany.ImageUrl = await getImg(entry.CustomerIcon.SystemProperties.Id);
                 currentCompany.UpdatedAt = entry.Sys.UpdatedAt.ToString();
-                currentCompany.Description = HttpUtility.HtmlDecode(entry.Description); //entry.Description;
+                currentCompany.Description = entry.Description; //entry.Description;
                //HttpUtility.HtmlEncode(entry.Description);
                currentCompany.Message = entry.Message;
                

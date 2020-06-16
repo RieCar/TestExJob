@@ -5,7 +5,7 @@ const initialState = {};
 
 export default function contractReducer(state = initialState, action: AnyAction) {
     switch (action.type) {
-      case ContractActions.SET_CURRENTCONTRACT:
+      case ContractActions.CLICKED_CURRENTCONTRACT:
         return action.payload.organisationId;
       case ContractActions.SET_CURRENTCONTRACT_SUCCESS:
         return action.payload.contract;

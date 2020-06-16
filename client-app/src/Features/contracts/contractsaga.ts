@@ -8,16 +8,18 @@ import { IStore } from "../../app/models/store";
 
 
 function* handleOnSetCurrentContract(action: AnyAction) {
-  const contract = action.payload.contract;
-//   const contract = useSelector((store: IStore) => store.currentOrg?.contract);
-//   console.log("contract orgid", contractId);
+  const contract = action.payload.clicked;
+
   if(contract){
     yield put(setCurrentContractSuccess(contract));
   }
+  else{
+    yield put(setCurrentContractFailure("Something went wrong, try again"))
+  };
       
     
 }
 
 export const contractSagas = [
-  takeLatest(ContractActions.SET_CURRENTCONTRACT, handleOnSetCurrentContract),
+  takeLatest(ContractActions.CLICKED_CURRENTCONTRACT, handleOnSetCurrentContract),
 ];

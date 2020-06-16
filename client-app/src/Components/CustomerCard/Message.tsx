@@ -18,7 +18,7 @@ const Message: React.FC = () => {
         </div>
       ) : (
         <div className="message-box_nocontent">
-          <text>No current message to show</text>
+          <div>No current message to show</div>
         </div>
       )}
       </div>

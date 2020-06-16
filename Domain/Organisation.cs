@@ -17,7 +17,7 @@ namespace Domain
 
         public string UpdatedAt { get; set; }
   
-        public string Description { get; set; }
+        public dynamic Description { get; set; }
         public List<Project> Projects { get; set; }
 
         public List<Order> Orders { get; set; }
