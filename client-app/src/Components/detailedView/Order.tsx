@@ -41,7 +41,7 @@ const OrderDetail: React.FC = () => {
                   <b>Day of end: </b> {order?.endDate}
                 </p>
                 <p>
-                  <b>Estimated cost: </b> {order?.estimatedCost}{" "}
+                  <b>Estimated cost: </b> {order?.estimatedcost}
                 </p>
               </div>
               <div className="orderpart_content">

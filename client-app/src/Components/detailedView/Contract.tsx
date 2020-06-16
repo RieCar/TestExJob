@@ -2,6 +2,8 @@ import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { IStore } from "../../app/models/store";
 
+import "../../app/layout/style/contract.scss";
+
 const Contract: React.FC = () => {
   const contract = useSelector((store: IStore) => store.currentContract);
   const contractTitel = useSelector((store: IStore) => store.currentContract?.titel);

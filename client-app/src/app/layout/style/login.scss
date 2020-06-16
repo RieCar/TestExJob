@@ -16,12 +16,18 @@
     text-align: center; 
     margin:0 auto; 
     //padding: 10px 0; 
+    @media screen and (max-width: $breakpoint-small) {
+        width: 100%;
+    }
 }
 
 .login-content{
     width: 60%; 
     margin: 0 auto; 
     padding: 20px 0 20px 0; 
+    @media screen and (max-width: $breakpoint-small) {
+        width: 100%;
+    }
 }
 
 

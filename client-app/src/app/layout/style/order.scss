@@ -1,3 +1,6 @@
+@import '../style/breakpoints.scss';
+@import '../style/variables.scss';
+
 .orderview{
     padding: 20px 0; 
 }
@@ -14,7 +17,12 @@
 .orderpart_aside{
     float:right; 
     width: 30%; 
-    
+    padding-left: 30px; 
+
+    @media screen and (max-width: $breakpoint-small) {
+       padding-left:0;
+       font-size: 12px;
+    }
 }
 
 .orderpart_content{

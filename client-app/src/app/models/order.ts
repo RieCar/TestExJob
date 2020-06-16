@@ -11,6 +11,6 @@ export interface IOrder{
     status?: string;
     contact?: IContact;
     contactAtCamelonta?: IEmployee;
-    estimatedCost?: number; 
+    estimatedcost?: number; 
     totalOrderDays?: number; 
 }

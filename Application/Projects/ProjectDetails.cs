@@ -36,8 +36,8 @@ namespace Application.Projects
                 currentProject.Id = entry.Sys.Id;
                 currentProject.Titel = entry.ProjectTitel;
                 currentProject.Description = entry.Description;
-                currentProject.StartDate = entry.StartDate;//ToString("yyyy MM dd");
-                currentProject.EndDate = entry.EndDate;//.ToString("yyyy MM dd"); 
+                currentProject.StartDate = entry.StartDate.ToString("yyyy MM dd");
+                currentProject.EndDate = entry.EndDate.ToString("yyyy MM dd"); 
                 currentProject.CurrentStatus = entry.Status;
                 var contact = new Domain.Contact(){
                     FullName = entry.OrganisationContactReference.FirstName +" "+ entry.OrganisationContactReference.LastName,
