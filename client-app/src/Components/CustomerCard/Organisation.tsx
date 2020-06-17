@@ -1,15 +1,10 @@
-import React, { useEffect, Fragment, useRef } from 'react';
+import React, { Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
-
-
 
 import { useSelector } from 'react-redux';
 import { IStore } from '../../app/models/store';
 
 import '../../app/layout/style/organisation.scss';
-
-import { richTextFromMarkdown } from '@contentful/rich-text-from-markdown';
-
 
 const OrganisationDetail: React.FC = () => {
   const currentUserOrganization = useSelector((store: IStore) => store.currentUser?.data.organisation);
