@@ -1,25 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
 import "./app/layout/index.css";
 import "./app/layout/style/global.scss";
 
 import App from "./app/App";
 import * as serviceWorker from "./serviceWorker";
 
-import { Provider } from "react-redux";
+
 import { initializeStore } from "./Features/store";
-import { Router } from "react-router-dom";
-import {createBrowserHistory} from 'history';
+
 
 export const history = createBrowserHistory(); 
-const store = initializeStore();
+const { store, persistor } = initializeStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router history={history}>
-        <App />       
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router history={history}>
+          <App />       
+        </Router>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
